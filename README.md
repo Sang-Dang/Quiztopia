@@ -6,7 +6,7 @@
 * **Target audience:** Teachers and Students
 
 > ## System Requirements
-> 1. As a student, I can
+> 1. As a user, I can
 > - Login and Register a new account
 > - Choose a quiz from a list of available quizzes
 > - Open a quiz given a "Quiz ID" and "Password"
