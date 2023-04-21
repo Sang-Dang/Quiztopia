@@ -1,12 +1,12 @@
 # Assignment
 
 ## 1. Requirements
-* **System name**: Online quiz website for students and teachers
+* **System name**: Online quiz website
 * **Purpose**: With online learning becoming more and more of a ubiquity in 21st century life, we would like to provide teachers with a way to create fun, interactive quizzes for their students, and share those quizzes easily.
 * **Target audience:** Teachers and Students
 
 > ## System Requirements
-> 1. As a student, I can
+> 1. As a user, I can
 > - Login and Register a new account
 > - Choose a quiz from a list of available quizzes
 > - Open a quiz given a "Quiz ID" and "Password"
