@@ -26,3 +26,4 @@
 
 ## 2. System GUI Design
 
+![Wireframe](https://user-images.githubusercontent.com/59560341/233794376-46aef863-525d-49a0-9706-11caee0a141a.png)
