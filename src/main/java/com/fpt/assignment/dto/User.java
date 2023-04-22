@@ -36,6 +36,10 @@ public class User {
             }
             return null;
         }
+
+        public String toString() {
+            return this.name();
+        }
     }
 
     private UUID id;
@@ -96,14 +100,6 @@ public class User {
 
     public final void setRole(UserRole role) {
         this.role = role;
-    }
-
-    public String getRoleString() {
-        return role.toString();
-    }
-
-    public void setRoleString(String role) {
-        this.role = UserRole.valueOf(role);
     }
 
     @Override

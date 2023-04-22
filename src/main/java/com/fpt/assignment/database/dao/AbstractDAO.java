@@ -139,7 +139,11 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T>, AutoCloseable {
         connection.commit();
     }
 
-    private List<String> getTableColumnNames() {
+    protected String getTableName() {
+        return "[" + getTableNameRaw() + "]";
+    }
+
+    protected List<String> getTableColumnNames() {
         List<String> columns = new ArrayList<>();
         Field[] fields = entityClass.getDeclaredFields();
         for (Field field : fields) {
@@ -148,12 +152,7 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T>, AutoCloseable {
                 columns.add(field.getName().trim());
             }
         }
-
         return columns;
-    }
-
-    protected String getTableName() {
-        return "[" + entityClass.getSimpleName().toLowerCase().trim() + "]";
     }
 
     protected String getTableColumnNamesAsString() {
@@ -214,6 +213,6 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T>, AutoCloseable {
     }
 
     protected abstract void setDMLQueryParameters(PreparedStatement statement, T entity, boolean update) throws SQLException;
-
     protected abstract T setSelectionQueryParameters(ResultSet resultSet) throws SQLException;
+    protected abstract String getTableNameRaw();
 }

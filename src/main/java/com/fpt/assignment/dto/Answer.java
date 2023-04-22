@@ -48,7 +48,7 @@ public class Answer {
         this.answer = answer;
     }
 
-    public boolean isIs_correct() {
+    public boolean getIs_correct() {
         return is_correct;
     }
 
