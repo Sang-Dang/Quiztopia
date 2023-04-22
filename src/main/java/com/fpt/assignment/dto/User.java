@@ -47,11 +47,11 @@ public class User {
     public User() {}
 
     public User(UUID id, String username, String password, String email, UserRole role) {
-        setId(id);
-        setUsername(username);
-        setPassword(password);
-        setEmail(email);
-        setRole(role);
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
     }
 
     public UUID getId() {
