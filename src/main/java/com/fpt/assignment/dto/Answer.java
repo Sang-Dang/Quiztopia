@@ -8,7 +8,7 @@ public class Answer implements InterfaceDTO {
     private UUID id;
     private UUID question_id;
     private String answer;
-    private boolean is_corrent;
+    private boolean is_correct;
 
     public Answer() {
     }
@@ -17,7 +17,7 @@ public class Answer implements InterfaceDTO {
         this.id = id;
         this.question_id = question_id;
         this.answer = answer;
-        this.is_corrent = is_corrent;
+        this.is_correct = is_corrent;
     }
 
     @Override
@@ -49,17 +49,17 @@ public class Answer implements InterfaceDTO {
         this.answer = answer;
     }
 
-    public boolean isIs_corrent() {
-        return is_corrent;
+    public boolean isIs_correct() {
+        return is_correct;
     }
 
-    public void setIs_corrent(boolean is_corrent) {
-        this.is_corrent = is_corrent;
+    public void setIs_correct(boolean is_correct) {
+        this.is_correct = is_correct;
     }
 
     @Override
     public String toString() {
-        return "Answer [id=" + id + ", question_id=" + question_id + ", answer=" + answer + ", is_corrent=" + is_corrent
+        return "Answer [id=" + id + ", question_id=" + question_id + ", answer=" + answer + ", is_correct=" + is_correct
                 + "]";
     }
 }

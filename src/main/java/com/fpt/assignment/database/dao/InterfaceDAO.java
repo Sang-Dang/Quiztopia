@@ -1,4 +1,4 @@
-package com.fpt.assignment.database.dao.factory;
+package com.fpt.assignment.database.dao;
 
 import java.util.List;
 import java.util.UUID;
