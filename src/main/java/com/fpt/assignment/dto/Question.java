@@ -2,11 +2,6 @@ package com.fpt.assignment.dto;
 
 import java.util.UUID;
 
-import com.fpt.assignment.exception.checked.ModelException;
-import com.fpt.assignment.exception.checked.model.NullObjectException;
-import com.fpt.assignment.exception.checked.model.UUIDParseException;
-import com.fpt.assignment.util.Validate;
-
 public class Question implements InterfaceDTO {
     private static final String TABLE_NAME = "questions";
 
