@@ -2,22 +2,29 @@ package com.fpt.assignment.dto;
 
 import java.util.UUID;
 
-public class Question {
+import com.fpt.assignment.exception.checked.ModelException;
+import com.fpt.assignment.exception.checked.model.NullObjectException;
+import com.fpt.assignment.exception.checked.model.UUIDParseException;
+import com.fpt.assignment.util.Validate;
+
+public class Question implements InterfaceDTO {
     private static final String TABLE_NAME = "questions";
 
     private UUID id;
     private UUID quiz_id;
     private String question;
 
-    public Question() {}
-
-    public Question(UUID id, UUID quiz_id, String question) {
-        setId(id);
-        setQuiz_id(quiz_id);
-        setQuestion(question);
+    public Question() {
     }
 
-    public static String getTableName() {
+    public Question(UUID id, UUID quiz_id, String question) {
+        this.id = id;
+        this.quiz_id = quiz_id;
+        this.question = question;
+    }
+
+    @Override
+    public String getTableName() {
         return TABLE_NAME;
     }
 
@@ -25,7 +32,7 @@ public class Question {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(UUID id)  {
         this.id = id;
     }
 
