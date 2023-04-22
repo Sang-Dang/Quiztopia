@@ -3,7 +3,7 @@ package com.fpt.assignment.dto;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Quiz {
+public class Quiz implements InterfaceDTO {
     public static final String TABLE_NAME = "quizzes";
 
     private UUID id;
@@ -15,11 +15,16 @@ public class Quiz {
     public Quiz() {}
 
     public Quiz(UUID id, String title, String description, LocalDate created_at, UUID userId) {
-        setId(id);
-        setTitle(title);
-        setDescription(description);
-        setCreated_at(created_at);
-        setUserId(userId);
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.created_at = created_at;
+        this.userId = userId;
+    }
+
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
     }
 
     public UUID getId() {
