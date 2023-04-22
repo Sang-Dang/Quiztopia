@@ -57,3 +57,6 @@
 ![image](https://user-images.githubusercontent.com/59560341/233799801-62316a2b-20d0-48c3-a586-b50205518620.png)
 **+ View Quiz**
 
+## Database design
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2F6i4VQDxye5QNyg2mfbArJX%2FUntitled%3Fnode-id%3D0%253A1%26t%3DftkvrRLid5l7nPdI-1" allowfullscreen></iframe>
+
