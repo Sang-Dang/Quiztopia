@@ -2,7 +2,7 @@ package com.fpt.assignment.dto;
 
 import java.util.UUID;
 
-public class Question implements InterfaceDTO {
+public class Question {
     private static final String TABLE_NAME = "questions";
 
     private UUID id;
@@ -18,7 +18,6 @@ public class Question implements InterfaceDTO {
         this.question = question;
     }
 
-    @Override
     public String getTableName() {
         return TABLE_NAME;
     }

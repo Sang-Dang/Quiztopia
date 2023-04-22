@@ -27,6 +27,10 @@ public class Result {
         this.completed_at = completed_at;
     }
 
+    public String getTableName() {
+        return TABLE_NAME;
+    }
+
     public UUID getId() {
         return id;
     }

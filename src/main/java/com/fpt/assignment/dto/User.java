@@ -3,7 +3,7 @@ package com.fpt.assignment.dto;
 import java.util.UUID;
 
 public class User {
-    public static final String TABLE_NAME = "users";
+    private static final String TABLE_NAME = "users";
 
     public enum UserRole {
         ADMIN ("AD"), 
@@ -52,6 +52,10 @@ public class User {
         this.password = password;
         this.email = email;
         this.role = role;
+    }
+
+    public String getTableName() {
+        return TABLE_NAME;
     }
 
     public UUID getId() {

@@ -2,7 +2,7 @@ package com.fpt.assignment.dto;
 
 import java.util.UUID;
 
-public class Answer implements InterfaceDTO {
+public class Answer {
     private static final String TABLE_NAME = "answers";
 
     private UUID id;
@@ -20,7 +20,6 @@ public class Answer implements InterfaceDTO {
         this.is_correct = is_corrent;
     }
 
-    @Override
     public String getTableName() {
         return TABLE_NAME;
     }

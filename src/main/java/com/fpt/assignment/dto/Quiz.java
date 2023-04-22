@@ -3,8 +3,8 @@ package com.fpt.assignment.dto;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Quiz implements InterfaceDTO {
-    public static final String TABLE_NAME = "quizzes";
+public class Quiz {
+    private static final String TABLE_NAME = "quizzes";
 
     private UUID id;
     private String title;
@@ -22,7 +22,6 @@ public class Quiz implements InterfaceDTO {
         this.userId = userId;
     }
 
-    @Override
     public String getTableName() {
         return TABLE_NAME;
     }
