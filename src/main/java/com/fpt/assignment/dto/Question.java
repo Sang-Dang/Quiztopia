@@ -18,7 +18,7 @@ public class Question {
         this.question = question;
     }
 
-    public String getTableName() {
+    public static String getTableName() {
         return TABLE_NAME;
     }
 

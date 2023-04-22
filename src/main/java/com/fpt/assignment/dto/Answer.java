@@ -20,7 +20,7 @@ public class Answer {
         this.is_correct = is_corrent;
     }
 
-    public String getTableName() {
+    public static String getTableName() {
         return TABLE_NAME;
     }
 

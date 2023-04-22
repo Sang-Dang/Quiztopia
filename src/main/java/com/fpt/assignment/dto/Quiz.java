@@ -22,7 +22,7 @@ public class Quiz {
         this.userId = userId;
     }
 
-    public String getTableName() {
+    public static String getTableName() {
         return TABLE_NAME;
     }
 

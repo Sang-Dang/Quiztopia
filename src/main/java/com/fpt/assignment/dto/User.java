@@ -54,7 +54,7 @@ public class User {
         this.role = role;
     }
 
-    public String getTableName() {
+    public static String getTableName() {
         return TABLE_NAME;
     }
 

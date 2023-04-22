@@ -27,7 +27,7 @@ public class Result {
         this.completed_at = completed_at;
     }
 
-    public String getTableName() {
+    public static String getTableName() {
         return TABLE_NAME;
     }
 
