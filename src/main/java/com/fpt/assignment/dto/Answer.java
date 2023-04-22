@@ -2,24 +2,26 @@ package com.fpt.assignment.dto;
 
 import java.util.UUID;
 
-public class Answer {
-    public static final String TABLE_NAME = "answers";
+public class Answer implements InterfaceDTO {
+    private static final String TABLE_NAME = "answers";
 
     private UUID id;
     private UUID question_id;
     private String answer;
     private boolean is_corrent;
 
-    public Answer() {}
-
-    public Answer(UUID id, UUID question_id, String answer, boolean is_corrent) {
-        setId(id);
-        setQuestion_id(question_id);
-        setAnswer(answer);
-        setIs_corrent(is_corrent);
+    public Answer() {
     }
 
-    public static String getTableName() {
+    public Answer(UUID id, UUID question_id, String answer, boolean is_corrent) {
+        this.id = id;
+        this.question_id = question_id;
+        this.answer = answer;
+        this.is_corrent = is_corrent;
+    }
+
+    @Override
+    public String getTableName() {
         return TABLE_NAME;
     }
 
