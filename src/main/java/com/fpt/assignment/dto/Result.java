@@ -16,14 +16,15 @@ public class Result {
     private int score;
     private LocalDate completed_at;
 
-    public Result() {}
+    public Result() {
+    }
 
     public Result(UUID id, UUID user_id, UUID quiz_id, int score, LocalDate completed_at) {
-        setId(id);
-        setUser_id(user_id);
-        setQuiz_id(quiz_id);
-        setScore(score);
-        setCompleted_at(completed_at);
+        this.id = id;
+        this.user_id = user_id;
+        this.quiz_id = quiz_id;
+        this.score = score;
+        this.completed_at = completed_at;
     }
 
     public UUID getId() {
