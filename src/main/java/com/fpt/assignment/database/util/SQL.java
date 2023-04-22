@@ -5,8 +5,7 @@ public enum SQL {
     SELECT_ALL ("SELECT %s FROM %s;"),
     SELECT ("SELECT %s FROM %s WHERE id = ?;"),
     ADD ("INSERT INTO %s (%s) VALUES (%s);"),
-    UPDATE ("UPDATE %s SET %s WHERE id = ?;"),
-    SELECT_BY_NAME ("SELECT %s FROM %s WHERE name = ?;");
+    UPDATE ("UPDATE %s SET %s WHERE id = ?;");
     
     private final String query;
     

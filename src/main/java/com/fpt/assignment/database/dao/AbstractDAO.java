@@ -187,7 +187,8 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T>, AutoCloseable {
 
     protected String getAddQuery() {
         String question = getTableColumnNamesAsQuestionMarks();
-        return String.format(SQL.query("ADD"), getTableName(), getTableColumnNamesAsStringWithoutId(), question.substring(0, question.length() - 3));
+        return String.format(SQL.query("ADD"), getTableName(), getTableColumnNamesAsStringWithoutId(),
+                question.substring(0, question.length() - 3));
     }
 
     protected String getUpdateQuery() {
@@ -212,7 +213,10 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T>, AutoCloseable {
         return result;
     }
 
-    protected abstract void setDMLQueryParameters(PreparedStatement statement, T entity, boolean update) throws SQLException;
+    protected abstract void setDMLQueryParameters(PreparedStatement statement, T entity, boolean update)
+            throws SQLException;
+
     protected abstract T setSelectionQueryParameters(ResultSet resultSet) throws SQLException;
+
     protected abstract String getTableNameRaw();
 }
