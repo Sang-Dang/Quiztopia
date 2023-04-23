@@ -18,8 +18,9 @@ public class QuizValidator extends AbstractValidator<Quiz> {
         validateTitle(object.getTitle());
         validateDescription(object.getDescription());
         validateCreated_at(object.getCreated_at());
-        validateUser_id(object.getUserId());
+        validateUser_id(object.getUser_id());
         validatePassword(object.getPassword());
+        validateIs_public(object.isIs_public());
     }
     
     public void validateTitle(String title) throws ValidationException {
@@ -42,5 +43,9 @@ public class QuizValidator extends AbstractValidator<Quiz> {
         if(password != null)  {
             lengthString(password, 255);
         }
+    }
+
+    public void validateIs_public(Boolean is_public) throws ValidationException {
+        nullObject(is_public);
     }
 }

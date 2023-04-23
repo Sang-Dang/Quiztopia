@@ -8,7 +8,9 @@ public enum SQL {
     UPDATE ("UPDATE %s SET %s WHERE id = ?;"),
     USER_SELECT_BY_USERNAME ("SELECT id FROM %s WHERE username = ?;"),
     USER_SELECT_BY_EMAIL ("SELECT id FROM %s WHERE email = ?;"),
-    USER_SELECT_BY_USERNAME_PASSWORD ("SELECT id FROM %s WHERE username = ? AND password = ?;");
+    USER_SELECT_BY_USERNAME_PASSWORD ("SELECT id FROM %s WHERE username = ? AND password = ?;"),
+    QUIZ_SELECT_PUBLIC ("SELECT %s FROM %s WHERE is_public = true;"),
+    QUIZ_SELECT_BY_USER ("SELECT %s FROM %s WHERE user_id = ?;");
     
     private final String query;
     
