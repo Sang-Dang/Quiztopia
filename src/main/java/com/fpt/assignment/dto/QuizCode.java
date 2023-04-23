@@ -1,6 +1,7 @@
 package com.fpt.assignment.dto;
 
 import java.util.UUID;
+import javax.ejb.ObjectNotFoundException;
 
 public class QuizCode {
     private static final String TABLE_NAME = "quiz_code";
@@ -12,7 +13,7 @@ public class QuizCode {
     public QuizCode() {
     }
 
-    public QuizCode(UUID id, UUID quiz_id, String code) {
+    public QuizCode(UUID id, UUID quiz_id, String code)  throws ObjectNotFoundException {
         this.id = id;
         this.quiz_id = quiz_id;
         this.code = code;
@@ -26,7 +27,10 @@ public class QuizCode {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(UUID id)  throws ObjectNotFoundException {
+        if(id == null){
+            throw new ObjectNotFoundException();
+        }
         this.id = id;
     }
 
@@ -34,7 +38,10 @@ public class QuizCode {
         return quiz_id;
     }
 
-    public void setQuiz_id(UUID quiz_id) {
+    public void setQuiz_id(UUID quiz_id) throws ObjectNotFoundException {
+        if(quiz_id == null){
+            throw new ObjectNotFoundException();
+        }
         this.quiz_id = quiz_id;
     }
 
@@ -42,7 +49,10 @@ public class QuizCode {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(String code) throws ObjectNotFoundException {
+        if(code == null){
+            throw new ObjectNotFoundException();
+        }
         this.code = code;
     }
 

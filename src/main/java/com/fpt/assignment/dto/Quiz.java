@@ -2,6 +2,7 @@ package com.fpt.assignment.dto;
 
 import java.time.LocalDate;
 import java.util.UUID;
+import javax.ejb.ObjectNotFoundException;
 
 public class Quiz {
     private static final String TABLE_NAME = "quizzes";
@@ -15,7 +16,7 @@ public class Quiz {
 
     public Quiz() {}
 
-    public Quiz(UUID id, String title, String description, LocalDate created_at, UUID userId, String password) {
+    public Quiz(UUID id, String title, String description, LocalDate created_at, UUID userId, String password) throws ObjectNotFoundException {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -32,7 +33,10 @@ public class Quiz {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(UUID id) throws ObjectNotFoundException {
+        if(id == null){
+            throw new ObjectNotFoundException();
+        }
         this.id = id;
     }
 
@@ -40,7 +44,10 @@ public class Quiz {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title) throws ObjectNotFoundException {
+        if(title == null){
+            throw new ObjectNotFoundException();
+        }
         this.title = title;
     }
 
@@ -48,7 +55,10 @@ public class Quiz {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description) throws ObjectNotFoundException {
+        if(description == null){
+            throw new ObjectNotFoundException();
+        }
         this.description = description;
     }
 
@@ -56,7 +66,10 @@ public class Quiz {
         return created_at;
     }
 
-    public void setCreated_at(LocalDate created_at) {
+    public void setCreated_at(LocalDate created_at) throws ObjectNotFoundException {
+        if(created_at == null){
+            throw new ObjectNotFoundException();
+        }
         this.created_at = created_at;
     }
 
@@ -64,7 +77,10 @@ public class Quiz {
         return user_id;
     }
 
-    public void setUserId(UUID userId) {
+    public void setUserId(UUID userId) throws ObjectNotFoundException {
+        if(user_id == null){
+            throw new ObjectNotFoundException();
+        }
         this.user_id = userId;
     }
 
@@ -72,7 +88,10 @@ public class Quiz {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) throws ObjectNotFoundException {
+        if(password == null){
+            throw new ObjectNotFoundException();
+        }
         this.password = password;
     }
 
