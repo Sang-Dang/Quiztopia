@@ -3,20 +3,20 @@ package com.fpt.assignment.dto;
 import java.util.UUID;
 import javax.ejb.ObjectNotFoundException;
 
-public class Question {
-    private static final String TABLE_NAME = "questions";
+public class QuizCode {
+    private static final String TABLE_NAME = "quiz_code";
 
     private UUID id;
     private UUID quiz_id;
-    private String question;
+    private String code;
 
-    public Question() {
+    public QuizCode() {
     }
 
-    public Question(UUID id, UUID quiz_id, String question) throws ObjectNotFoundException {
+    public QuizCode(UUID id, UUID quiz_id, String code)  throws ObjectNotFoundException {
         this.id = id;
         this.quiz_id = quiz_id;
-        this.question = question;
+        this.code = code;
     }
 
     public static String getTableName() {
@@ -45,19 +45,19 @@ public class Question {
         this.quiz_id = quiz_id;
     }
 
-    public String getQuestion() {
-        return question;
+    public String getCode() {
+        return code;
     }
 
-    public void setQuestion(String question) throws ObjectNotFoundException {
-        if(question == null){
+    public void setCode(String code) throws ObjectNotFoundException {
+        if(code == null){
             throw new ObjectNotFoundException();
         }
-        this.question = question;
+        this.code = code;
     }
 
     @Override
     public String toString() {
-        return "Question [id=" + id + ", quiz_id=" + quiz_id + ", question=" + question + "]";
+        return "QuizCode [id=" + id + ", quiz_id=" + quiz_id + ", code=" + code + "]";
     }
 }

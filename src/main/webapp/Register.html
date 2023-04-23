@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+    <title>Register Page</title>
+</head>
+<body>
+    <h1>Register Page</h1>
+    <form action="UserServlet" method="post">
+        <p>Username: <input type="text" name="username" required></p>
+        <p>Password: <input type="password" name="password" required></p>
+        <p>Email: <input type="email" name="email" required></p>
+        <p>Role: <select name="role">
+            <option value="admin">Admin</option>
+            <option value="student">Student</option>
+        </select></p>
+        <p><input type="submit" name="action" value="Register"></p>
+    </form>
+    <p>Already have an account? <a href="login.html">Login here</a></p>
+</body>
+</html>
