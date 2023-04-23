@@ -3,11 +3,13 @@ package com.fpt.assignment.dto;
 import java.util.UUID;
 
 public class User {
+
     private static final String TABLE_NAME = "users";
 
     public enum UserRole {
-        ADMIN ("AD"), 
-        USER ("US");
+        ADMIN("AD"),
+        USER("US"),
+        UNKNOWN("");
 
         String value;
 
@@ -37,6 +39,7 @@ public class User {
             return null;
         }
 
+        @Override
         public String toString() {
             return this.name();
         }
@@ -48,7 +51,8 @@ public class User {
     private String email;
     private UserRole role;
 
-    public User() {}
+    public User() {
+    }
 
     public User(UUID id, String username, String password, String email, UserRole role) {
         this.id = id;
@@ -106,5 +110,5 @@ public class User {
     public String toString() {
         return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", role="
                 + role + "]";
-    }    
+    }
 }

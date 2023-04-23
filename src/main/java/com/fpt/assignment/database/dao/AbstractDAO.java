@@ -37,9 +37,13 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T>, AutoCloseable {
     }
 
     @Override
-    public void close() throws SQLException {
-        if (connection != null && !connection.isClosed()) {
-            connection.close();
+    public void close() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -123,7 +127,7 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T>, AutoCloseable {
         return returnValue;
     }
 
-    public void finalize(boolean check) throws SQLException {
+    public void finalize(boolean check) {
         if (check) {
             commit();
         } else {
@@ -131,12 +135,20 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T>, AutoCloseable {
         }
     }
 
-    public void rollback() throws SQLException {
-        connection.rollback();
+    public void rollback() {
+        try {
+            connection.rollback();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void commit() throws SQLException {
-        connection.commit();
+    public void commit() {
+        try {
+            connection.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     protected String getTableName() {

@@ -1,8 +1,8 @@
 package com.fpt.assignment.exception.checked.validate;
 
-import com.fpt.assignment.exception.checked.ValidatorException;
+import com.fpt.assignment.exception.checked.ValidationException;
 
-public class StringLengthException extends ValidatorException {
+public class StringLengthException extends ValidationException {
     
     public StringLengthException(String message) {
         super(message);

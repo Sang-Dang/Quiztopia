@@ -1,8 +1,8 @@
 package com.fpt.assignment.exception.checked.validate;
 
-import com.fpt.assignment.exception.checked.ValidatorException;
+import com.fpt.assignment.exception.checked.ValidationException;
 
-public class NullObjectException extends ValidatorException {
+public class NullObjectException extends ValidationException {
     
     public NullObjectException(String message) {
         super(message);

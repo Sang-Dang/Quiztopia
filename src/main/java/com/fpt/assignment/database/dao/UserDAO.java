@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
+import com.fpt.assignment.database.util.SQL;
 import com.fpt.assignment.dto.User;
 import com.fpt.assignment.dto.User.UserRole;
 
@@ -46,5 +47,23 @@ public class UserDAO extends AbstractDAO<User> {
     @Override
     protected String getTableNameRaw() {
         return User.getTableName();
+    }
+
+    public UUID getByUsernameAndPassword(String username, String password) {
+        UUID returnValue = null;
+        if (connection != null) {
+            try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("SELECT_BY_USERNAME_PASSWORD"), getTableName()))) {
+                statement.setString(1, username);
+                statement.setString(2, password);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        returnValue = resultSet.getObject("id", UUID.class);
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return returnValue;
     }
 }

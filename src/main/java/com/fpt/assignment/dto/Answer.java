@@ -8,16 +8,16 @@ public class Answer {
     private UUID id;
     private UUID question_id;
     private String answer;
-    private boolean is_correct;
+    private Boolean is_correct;
 
     public Answer() {
     }
 
-    public Answer(UUID id, UUID question_id, String answer, boolean is_corrent) {
+    public Answer(UUID id, UUID question_id, String answer, boolean is_correct) {
         this.id = id;
         this.question_id = question_id;
         this.answer = answer;
-        this.is_correct = is_corrent;
+        this.is_correct = is_correct;
     }
 
     public static String getTableName() {
@@ -48,11 +48,11 @@ public class Answer {
         this.answer = answer;
     }
 
-    public boolean getIs_correct() {
+    public Boolean getIs_correct() {
         return is_correct;
     }
 
-    public void setIs_correct(boolean is_correct) {
+    public void setIs_correct(Boolean is_correct) {
         this.is_correct = is_correct;
     }
 

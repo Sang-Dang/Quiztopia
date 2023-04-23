@@ -26,13 +26,6 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>7.4.1.jre8</version>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator-modules</artifactId>
-            <version>6.2.5.Final</version>
-            <classifier>wildfly-22.0.0.Final-patch</classifier>
-            <type>zip</type>
-        </dependency>
     </dependencies>
     
 

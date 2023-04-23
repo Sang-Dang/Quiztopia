@@ -1,8 +1,8 @@
 package com.fpt.assignment.exception.checked.validate;
 
-import com.fpt.assignment.exception.checked.ValidatorException;
+import com.fpt.assignment.exception.checked.ValidationException;
 
-public class UUIDParseException extends ValidatorException {
+public class UUIDParseException extends ValidationException {
     
     public UUIDParseException(String message) {
         super(message);
