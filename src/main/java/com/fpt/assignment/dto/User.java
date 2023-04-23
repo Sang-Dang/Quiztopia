@@ -1,7 +1,6 @@
 package com.fpt.assignment.dto;
 
 import java.util.UUID;
-import javax.ejb.ObjectNotFoundException;
 
 public class User {
 
@@ -55,7 +54,7 @@ public class User {
     public User() {
     }
 
-    public User(UUID id, String username, String password, String email, UserRole role) throws ObjectNotFoundException {
+    public User(UUID id, String username, String password, String email, UserRole role) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -71,10 +70,7 @@ public class User {
         return id;
     }
 
-    public final void setId(UUID id) throws ObjectNotFoundException {
-        if(id == null){
-            throw new ObjectNotFoundException();
-        }
+    public final void setId(UUID id) {
         this.id = id;
     }
 
@@ -82,10 +78,7 @@ public class User {
         return username;
     }
 
-    public final void setUsername(String username)  throws ObjectNotFoundException {
-        if(username == null){
-            throw new ObjectNotFoundException();
-        }
+    public final void setUsername(String username) {
         this.username = username;
     }
 
@@ -93,10 +86,7 @@ public class User {
         return password;
     }
 
-    public final void setPassword(String password) throws ObjectNotFoundException {
-        if(password == null){
-            throw new ObjectNotFoundException();
-        }
+    public final void setPassword(String password) {
         this.password = password;
     }
 
@@ -104,10 +94,7 @@ public class User {
         return email;
     }
 
-    public final void setEmail(String email)  throws ObjectNotFoundException {
-        if(email == null){
-            throw new ObjectNotFoundException();
-        }
+    public final void setEmail(String email) {
         this.email = email;
     }
 
@@ -115,10 +102,7 @@ public class User {
         return role;
     }
 
-    public final void setRole(UserRole role)  throws ObjectNotFoundException {
-        if(role == null){
-            throw new ObjectNotFoundException();
-        }
+    public final void setRole(UserRole role) {
         this.role = role;
     }
 

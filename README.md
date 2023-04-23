@@ -1,10 +1,5 @@
 # Assignment
 
-## 0. Members
-- Đặng Anh Sang SE170287
-- Đỗ Thành Tú SE63390
-- Nguyễn Phạm Quốc Thắng SE161786
-
 ## 1. Requirements
 * **System name**: Online quiz website
 * **Purpose**: With online learning becoming more and more of a ubiquity in 21st century life, we would like to provide teachers with a way to create fun, interactive quizzes for their students, and share those quizzes easily.

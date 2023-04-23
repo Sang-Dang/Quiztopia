@@ -2,7 +2,6 @@ package com.fpt.assignment.dto;
 
 import java.time.LocalDate;
 import java.util.UUID;
-import javax.ejb.ObjectNotFoundException;
 
 /**
  *
@@ -20,7 +19,7 @@ public class Result {
     public Result() {
     }
 
-    public Result(UUID id, UUID user_id, UUID quiz_id, int score, LocalDate completed_at) throws ObjectNotFoundException {
+    public Result(UUID id, UUID user_id, UUID quiz_id, int score, LocalDate completed_at) {
         this.id = id;
         this.user_id = user_id;
         this.quiz_id = quiz_id;
@@ -36,10 +35,7 @@ public class Result {
         return id;
     }
 
-    public void setId(UUID id) throws ObjectNotFoundException {
-        if(id == null){
-            throw new ObjectNotFoundException();
-        }
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -47,10 +43,7 @@ public class Result {
         return user_id;
     }
 
-    public void setUser_id(UUID user_id)  throws ObjectNotFoundException {
-        if(user_id == null){
-            throw new ObjectNotFoundException();
-        }
+    public void setUser_id(UUID user_id) {
         this.user_id = user_id;
     }
 
@@ -58,10 +51,7 @@ public class Result {
         return quiz_id;
     }
 
-    public void setQuiz_id(UUID quiz_id)  throws ObjectNotFoundException {
-        if(quiz_id == null){
-            throw new ObjectNotFoundException();
-        }
+    public void setQuiz_id(UUID quiz_id) {
         this.quiz_id = quiz_id;
     }
 
@@ -77,10 +67,7 @@ public class Result {
         return completed_at;
     }
 
-    public void setCompleted_at(LocalDate completed_at)  throws ObjectNotFoundException {
-        if(completed_at == null){
-            throw new ObjectNotFoundException();
-        }
+    public void setCompleted_at(LocalDate completed_at) {
         this.completed_at = completed_at;
     }
 
