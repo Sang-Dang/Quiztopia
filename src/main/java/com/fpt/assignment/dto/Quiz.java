@@ -13,10 +13,11 @@ public class Quiz {
     private UUID user_id;
     private String password;
     private boolean is_public;
+    private String code;
 
     public Quiz() {}
 
-    public Quiz(UUID id, String title, String description, LocalDate created_at, UUID userId, String password, boolean is_public) {
+    public Quiz(UUID id, String title, String description, LocalDate created_at, UUID userId, String password, boolean is_public, String code) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -24,6 +25,7 @@ public class Quiz {
         this.user_id = userId;
         this.password = password;
         this.is_public = is_public;
+        this.code = code;
     }
 
     public static String getTableName() {
@@ -85,7 +87,15 @@ public class Quiz {
     public void setUser_id(UUID user_id) {
         this.user_id = user_id;
     }
+    
+    public String getCode() {
+        return code;
+    }
 
+    public void setCode(String code) {
+        this.code = code;
+    }
+    
     @Override
     public String toString() {
         return "Quiz [id=" + id + ", title=" + title + ", description=" + description + ", created_at=" + created_at
