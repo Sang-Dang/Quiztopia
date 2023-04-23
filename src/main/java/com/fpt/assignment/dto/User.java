@@ -94,7 +94,7 @@ public class User {
     }
 
     public final void setPassword(String password) throws ObjectNotFoundException {
-        if(passwor == null){
+        if(password == null){
             throw new ObjectNotFoundException();
         }
         this.password = password;
