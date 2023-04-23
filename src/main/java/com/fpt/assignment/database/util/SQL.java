@@ -6,6 +6,8 @@ public enum SQL {
     SELECT ("SELECT %s FROM %s WHERE id = ?;"),
     ADD ("INSERT INTO %s (%s) VALUES (%s);"),
     UPDATE ("UPDATE %s SET %s WHERE id = ?;"),
+    USER_SELECT_BY_USERNAME ("SELECT id FROM %s WHERE username = ?;"),
+    USER_SELECT_BY_EMAIL ("SELECT id FROM %s WHERE email = ?;"),
     USER_SELECT_BY_USERNAME_PASSWORD ("SELECT id FROM %s WHERE username = ? AND password = ?;");
     
     private final String query;

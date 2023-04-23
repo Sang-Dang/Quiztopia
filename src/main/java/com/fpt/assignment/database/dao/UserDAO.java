@@ -52,9 +52,43 @@ public class UserDAO extends AbstractDAO<User> {
     public UUID getByUsernameAndPassword(String username, String password) {
         UUID returnValue = null;
         if (connection != null) {
-            try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("SELECT_BY_USERNAME_PASSWORD"), getTableName()))) {
+            try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("USER_SELECT_BY_USERNAME_PASSWORD"), getTableName()))) {
                 statement.setString(1, username);
                 statement.setString(2, password);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        returnValue = resultSet.getObject("id", UUID.class);
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return returnValue;
+    }
+
+    public UUID getByUsername(String username) {
+        UUID returnValue = null;
+        if (connection != null) {
+            try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("USER_SELECT_BY_USERNAME"), getTableName()))) {
+                statement.setString(1, username);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        returnValue = resultSet.getObject("id", UUID.class);
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return returnValue;
+    }
+
+    public UUID getByEmail(String email) {
+        UUID returnValue = null;
+        if (connection != null) {
+            try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("USER_SELECT_BY_EMAIL"), getTableName()))) {
+                statement.setString(1, email);
                 try (ResultSet resultSet = statement.executeQuery()) {
                     if (resultSet.next()) {
                         returnValue = resultSet.getObject("id", UUID.class);
