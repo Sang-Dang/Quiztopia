@@ -5,14 +5,34 @@
     <title>Add Quiz</title>
 </head>
 <body>
-    <Form action="" method="post"> 
-        Quiz no:<input type="text" name="txtNo"></br>
-        Question:<textarea  name="question" rows="4" cols="50"></textarea></br>
-        A: <input type="radio">test</br>
-        B: <input type="radio">test</br>
-        C: <input type="radio">test</br>
-        D: <input type="radio">test</br>
-       <br><input type="submit" value="Save">
-    </Form>
+    <form action="/savequiz" method="post"> 
+        <label for="txtNo">Quiz number:</label>
+        <input type="text" name="txtNo" id="txtNo" required><br>
+        
+        <label for="question">Question:</label>
+        <textarea name="question" id="question" rows="4" cols="50" required></textarea><br>
+        
+        <label for="optionA">Option A:</label>
+        <input type="text" name="optionA" id="optionA" required><br>
+        
+        <label for="optionB">Option B:</label>
+        <input type="text" name="optionB" id="optionB" required><br>
+        
+        <label for="optionC">Option C:</label>
+        <input type="text" name="optionC" id="optionC" required><br>
+        
+        <label for="optionD">Option D:</label>
+        <input type="text" name="optionD" id="optionD" required><br>
+        
+        <br>
+        <input type="submit" value="Save">
+    </form>
 </body>
 </html>
+
+
+
+
+
+
+
