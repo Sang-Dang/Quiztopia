@@ -23,8 +23,11 @@ CREATE TABLE [quizzes]
     [user_id] UNIQUEIDENTIFIER NOT NULL FOREIGN KEY REFERENCES users(id) ON DELETE CASCADE,
     [password] VARCHAR(255) NULL,
     [is_public] BIT NOT NULL DEFAULT 1,
-    [code] VARCHAR(6) NOT NULL
+    [code] VARCHAR(6) NOT NULL UNIQUE
 )
+
+CREATE NONCLUSTERED INDEX [idx_quizzes_user_id] ON [quizzes]([user_id]) INCLUDE ([id]);
+CREATE NONCLUSTERED INDEX [idx_quizzes_code] ON [quizzes]([code]) INCLUDE ([id]);
 
 CREATE TABLE [questions]
 (
@@ -32,6 +35,8 @@ CREATE TABLE [questions]
     [quiz_id] UNIQUEIDENTIFIER NOT NULL FOREIGN KEY REFERENCES quizzes(id) ON DELETE CASCADE,
     [question] VARCHAR(255) NOT NULL
 )
+
+CREATE NONCLUSTERED INDEX [idx_questions_quiz_id] ON [questions]([quiz_id]) INCLUDE ([id]);
 
 CREATE TABLE [answers]
 (
@@ -41,6 +46,8 @@ CREATE TABLE [answers]
     [is_correct] BIT NOT NULL DEFAULT 1
 )
 
+CREATE NONCLUSTERED INDEX [idx_answers_question_id] ON [answers]([question_id]) INCLUDE ([id], [is_correct]);
+
 CREATE TABLE [results]
 (
     [id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NEWID(),
@@ -49,3 +56,5 @@ CREATE TABLE [results]
     [score] INT NOT NULL CHECK (score >= 0),
     [completed_at] DATETIME NOT NULL DEFAULT GETDATE()
 )
+
+CREATE NONCLUSTERED INDEX [idx_results_user_id] ON [results]([user_id]) INCLUDE ([id]);
