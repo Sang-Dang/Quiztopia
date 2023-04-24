@@ -9,15 +9,18 @@ import com.fpt.assignment.exception.checked.ValidationException;
 import com.fpt.assignment.validator.UserValidator;
 
 public class UserService {
-    private UserService() {}
+
+    private UserService() {
+    }
 
     /**
      * Login with username and password
-     * 
-     * @param username 
+     *
+     * @param username
      * @param password
      * @return UUID of user (only null if database access error)
-     * @throws ValidationException if username or password is does not match the pattern
+     * @throws ValidationException if username or password is does not match the
+     * pattern
      * @throws ObjectNotFoundException if username or password is not found
      */
     public static UUID login(String username, String password) throws ValidationException, ObjectNotFoundException {
@@ -28,7 +31,7 @@ public class UserService {
             validator.validatePassword(password);
 
             returnValue = userDAO.getByUsernameAndPassword(username, password);
-            if(returnValue == null) {
+            if (returnValue == null) {
                 throw new ObjectNotFoundException();
             }
         }
@@ -37,11 +40,14 @@ public class UserService {
 
     /**
      * Register a new user
-     * @param username 
+     *
+     * @param username
      * @param password
-     * @param email 
-     * @return true if register successfully, false otherwise
-     * @throws ValidationException if username, password or email is does not match the pattern
+     * @param email
+     * @return true if register successfully, false otherwise (only false if
+     * database error)
+     * @throws ValidationException if username, password or email is does not
+     * match the pattern
      */
     public static boolean registerDefaultUser(String username, String password, String email) throws ValidationException {
         boolean returnValue = false;
@@ -51,11 +57,11 @@ public class UserService {
             validator.validatePassword(password);
             validator.validateEmail(email);
 
-            if(userDAO.getByUsername(username) == null) {
+            if (userDAO.getByUsername(username) == null) {
                 throw new ValidationException("username");
             }
 
-            if(userDAO.getByEmail(email) == null) {
+            if (userDAO.getByEmail(email) == null) {
                 throw new ValidationException("email");
             }
 
@@ -63,7 +69,7 @@ public class UserService {
             user.setUsername(username);
             user.setPassword(password);
             user.setEmail(email);
-            user.setRole(User.UserRole.USER);
+            user.setRole(User.UserRole.STUDENT);
 
             returnValue = userDAO.add(user) == 1;
             userDAO.finalize(returnValue);
@@ -73,13 +79,17 @@ public class UserService {
 
     /**
      * Get user by id
-     * @param id 
+     *
+     * @param id
      * @return User (only null if database access error)
      * @throws ObjectNotFoundException if user is not found
+     * @throws com.fpt.assignment.exception.checked.ValidationException if id is not valid
      */
-    public static User getUserById(UUID id) throws ObjectNotFoundException {
-        User returnValue = null;
+    public static User getUserById(UUID id) throws ObjectNotFoundException, ValidationException {
+        User returnValue;
+        UserValidator validator = new UserValidator();
         try (UserDAO userDAO = new UserDAO(User.class)) {
+            validator.validateId(id);
             returnValue = userDAO.searchById(id);
             if (returnValue == null) {
                 throw new ObjectNotFoundException();
@@ -87,4 +97,10 @@ public class UserService {
         }
         return returnValue;
     }
-} 
+    
+    public static User getSafeUserById(UUID id) throws ObjectNotFoundException, ValidationException {
+        User returnValue = getUserById(id);
+        returnValue.setPassword("");
+        return returnValue;
+    }
+}

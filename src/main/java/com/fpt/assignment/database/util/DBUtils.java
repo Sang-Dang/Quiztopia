@@ -15,6 +15,7 @@ public class DBUtils {
     
     public static Connection getConnection() {
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             return DriverManager.getConnection("jdbc:sqlserver://myassignment.database.windows.net:1433;"
                     + "database=QuizDatabase;"
                     + "user=admins@myassignment;"
@@ -25,6 +26,8 @@ public class DBUtils {
                     + "loginTimeout=30;"
             );
         } catch (SQLException ex) {
+            Logger.getLogger(DBUtils.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBUtils.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;

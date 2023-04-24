@@ -82,14 +82,23 @@ public class QuestionDAO extends AbstractDAO<Question> {
         return returnValue;
     }
 
-    public static void main(String[] args) {
-        QuestionDAO questionDAO = new QuestionDAO(Question.class);
-        System.out.println(String.format(SQL.query("ADD_RETURN_ID"), questionDAO.getTableName(), questionDAO.getTableColumnNamesAsStringWithoutId(), questionDAO.getTableColumnNamesAsQuestionMarksWithoutId()));
-        Question question = new Question();
-        question.setQuiz_id(UUID.fromString("7f20d300-8275-43e1-96f3-350d44d072de"));
-        question.setQuestion("Hello world");
-
-        System.out.println(questionDAO.addWithReturn(question));
-        questionDAO.commit();
+    public int getNumberOfQuestionsByQuizId(UUID quizId) {
+        int returnValue = 0;
+        if(connection != null) {
+            try (PreparedStatement statement = connection.prepareStatement(String.format(
+                    SQL.query("QUESTIONS_GET_NUMBER_OF_QUESTIONS_BY_QUIZID"), getTableName()))) {
+                statement.setObject(1, quizId);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet != null) {
+                        if (resultSet.next()) {
+                            returnValue = resultSet.getInt(1);
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return returnValue;
     }
 }

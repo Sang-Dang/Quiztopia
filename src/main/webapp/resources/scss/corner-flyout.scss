@@ -1,0 +1,66 @@
+@import 'settings';
+
+$border-radius: 10px;
+
+#corner-flyouts-container {
+    font-family: Montserrat;
+    .flyout {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        right: -500px;
+        bottom: 20px;
+        height: 85px;
+        background-color: white;
+        border-radius: $border-radius;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        visibility: hidden;
+        transition: all 500ms cubic-bezier(.42,.97,.52,1.49);
+        
+        &.active {
+            right: 20px;
+            visibility: visible;
+        }
+
+        .flyout-icon {
+            width: 75px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: $border-radius 0 0 $border-radius;
+            
+            i {
+                font-size: 2rem;
+                color: white;
+            }
+        }
+        
+        #text {
+            height: 100%;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 45px 0 15px;
+            
+            h3 {
+                font-size: 1.2rem;
+                font-weight: 500;
+            }
+            
+            p {
+                font-size: .8rem;
+                font-weight: 300;
+            }
+        }
+        
+        #close {
+            width: 75px;
+            height: 100%;
+            border: none;
+            border-radius: 0 $border-radius $border-radius 0;
+            /*background-color: transparent;*/
+        }
+    }
+}

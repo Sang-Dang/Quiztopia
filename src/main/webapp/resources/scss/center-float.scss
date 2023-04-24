@@ -1,0 +1,56 @@
+@import "settings.scss";
+
+.center-float {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    background-color: #00000080;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.1s ease-in-out;
+
+    .center-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 100;
+        transform: translate(-50%, -50%);
+        width: max-content;
+        height: max-content;
+        background-color: white;
+        padding: calc($page-padding / 1.2);
+        border-radius: 10px;
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 101;
+            i {
+                font-size: 1.5rem;
+                color: black;
+                transition: all 0.1s ease-in-out;
+            }
+
+            &:hover {
+                i {
+                    color: #00000080;
+                }
+            }
+            &:active {
+                i {
+                    transform: scale(90%);
+                }
+            }
+
+        }
+    }
+
+    &.active {
+        visibility: visible;
+        opacity: 1;
+    }
+}

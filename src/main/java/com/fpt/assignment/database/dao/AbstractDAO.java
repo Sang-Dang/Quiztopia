@@ -12,18 +12,35 @@ import java.util.UUID;
 
 import com.fpt.assignment.database.util.DBUtils;
 import com.fpt.assignment.database.util.SQL;
+import com.fpt.assignment.exception.runtime.NullConnectionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public abstract class AbstractDAO<T> implements InterfaceDAO<T>, AutoCloseable {
+
+    private static final int CONNECTION_TRIES = 20;
+    private static final Logger LOG = Logger.getLogger(AbstractDAO.class.getName());
+    
+
     protected Connection connection;
     private Class<T> entityClass;
 
     public AbstractDAO(Class<T> entityClass) {
         this.entityClass = entityClass;
-        connection = DBUtils.getConnection();
-        try {
-            // this is probably not going to cause errors
-            connection.setAutoCommit(false);
-        } catch (SQLException e) {
+
+        int i;
+        for (i = 1; i <= CONNECTION_TRIES; i++) {
+            connection = DBUtils.getConnection();
+            try {
+                // this is probably not going to cause errors
+                connection.setAutoCommit(false);
+                break;
+            } catch (SQLException e) {
+                LOG.log(Level.INFO, "Failed to get connection: Try #{0}", i);
+            }
+        }
+        if(i == CONNECTION_TRIES) {
+            throw new NullConnectionException();
         }
     }
 

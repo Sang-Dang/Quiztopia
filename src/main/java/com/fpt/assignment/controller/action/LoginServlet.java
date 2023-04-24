@@ -1,13 +1,19 @@
 package com.fpt.assignment.controller.action;
 
+import com.fpt.assignment.exception.checked.ObjectNotFoundException;
+import com.fpt.assignment.exception.checked.ValidationException;
+import com.fpt.assignment.exception.runtime.BackendException;
 import com.fpt.assignment.service.UserService;
+import com.fpt.assignment.util.Util;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.UUID;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -27,7 +33,33 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        // get current requesting URL
+        String currentURL = request.getHeader("referer");
+        currentURL = Util.removeSuccessAndError(currentURL);
+        String success, error;
+        // get session
+        HttpSession session = request.getSession(true);
+        try {
+            UUID userId = UserService.login(username, password);
+            if(userId == null) {
+                throw new BackendException();
+            }
+            session.setAttribute("currentUserId", userId);
+            
+            success = "Login successful. Have a great time!";
+            response.sendRedirect("home?success=" + Util.encode(success));
+            return;
+        } catch (ValidationException ex) {
+            ex.printStackTrace();
+            error = "Username or password are in the wrong format. Please try again";
+        } catch (ObjectNotFoundException ex) {
+            ex.printStackTrace();
+            error = "Username or password not found. Please try again";
+        }
+        currentURL = Util.addURLParameters(currentURL, "error", error);
+        response.sendRedirect(currentURL);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

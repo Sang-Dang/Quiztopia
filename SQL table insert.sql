@@ -10,7 +10,7 @@ DELETE FROM [users];
 INSERT INTO [users]
     (id, username, password, email, role)
 VALUES
-    ('765DCFE9-FC14-4B06-9B50-E3CD3CBFFE72', 'admin', '12345', 'admin@gmail.com', 'AD')
+    ('765DCFE9-FC14-4B06-9B50-E3CD3CBFFE72', 'admin', '12345', 'admin@gmail.com', 'TS')
 INSERT INTO [users]
     (id, username, password, email, role)
 VALUES

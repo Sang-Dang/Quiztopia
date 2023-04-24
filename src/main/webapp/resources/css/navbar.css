@@ -1,0 +1,97 @@
+* {
+  font-family: montserrat, sans-serif;
+}
+
+i {
+  color: white;
+}
+
+#nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 50px;
+  font-family: Montserrat;
+  background-color: #345995;
+}
+#nav #nav-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+#nav #nav-header #main-page-name {
+  font-weight: 900;
+  font-size: 2rem;
+  transition: all 0.2s linear;
+  text-decoration: none;
+}
+#nav #nav-header #main-page-name a {
+  color: white !important;
+  text-decoration: none !important;
+}
+#nav #nav-header #nav-items {
+  display: flex;
+  gap: 1rem;
+}
+#nav #nav-header #nav-items .nav-item {
+  list-style: none;
+}
+#nav #nav-header #nav-items .nav-item a {
+  text-decoration: none;
+  color: white;
+}
+#nav #nav-functions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+#nav #nav-functions #user-functions {
+  display: flex;
+  gap: 1rem;
+}
+#nav #nav-functions #user-functions .main-button {
+  text-decoration: none;
+  color: black;
+  background-color: #DC3C3C;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 500;
+}
+#nav #nav-functions #user-functions #user {
+  position: relative;
+  min-width: 150px;
+}
+#nav #nav-functions #user-functions #user:hover .dropdown {
+  transform: scaleY(1);
+}
+#nav #nav-functions #user-functions #user p {
+  display: inline-block;
+  background-color: #345995;
+  border-radius: 10px;
+  padding: 10px 20px;
+  color: white;
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+}
+#nav #nav-functions #user-functions #user .dropdown {
+  position: absolute;
+  top: 80%;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #345995;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: all 0.2s linear;
+  width: 100%;
+  padding: 20px;
+  border-radius: 0 0 10px 10px;
+}
+#nav #nav-functions #user-functions #user .dropdown .dropdown-button {
+  text-decoration: none;
+  color: white;
+  font-weight: 300;
+  font-size: 0.9rem;
+}
+
+/*# sourceMappingURL=navbar.css.map */

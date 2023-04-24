@@ -27,7 +27,7 @@ public class UserDAO extends AbstractDAO<User> {
         statement.setString(index++, entity.getUsername());
         statement.setString(index++, entity.getPassword());
         statement.setString(index++, entity.getEmail());
-        statement.setString(index++, entity.getRole().toString());
+        statement.setString(index++, entity.getRole().getValue());
         if (update) {
             statement.setObject(index++, entity.getId());
         }
@@ -40,7 +40,7 @@ public class UserDAO extends AbstractDAO<User> {
         returnValue.setUsername(resultSet.getString("username"));
         returnValue.setPassword(resultSet.getString("password"));
         returnValue.setEmail(resultSet.getString("email"));
-        returnValue.setRole(UserRole.valueOf(resultSet.getString("role")));
+        returnValue.setRole(UserRole.fromValue(resultSet.getString("role")));
         return returnValue;
     }
 

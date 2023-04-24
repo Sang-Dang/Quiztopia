@@ -1,0 +1,61 @@
+* {
+  font-family: montserrat, sans-serif;
+}
+
+#corner-flyouts-container {
+  font-family: Montserrat;
+}
+#corner-flyouts-container .flyout {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: -500px;
+  bottom: 20px;
+  height: 85px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  visibility: hidden;
+  transition: all 500ms cubic-bezier(0.42, 0.97, 0.52, 1.49);
+}
+#corner-flyouts-container .flyout.active {
+  right: 20px;
+  visibility: visible;
+}
+#corner-flyouts-container .flyout .flyout-icon {
+  width: 75px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px 0 0 10px;
+}
+#corner-flyouts-container .flyout .flyout-icon i {
+  font-size: 2rem;
+  color: white;
+}
+#corner-flyouts-container .flyout #text {
+  height: 100%;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 45px 0 15px;
+}
+#corner-flyouts-container .flyout #text h3 {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+#corner-flyouts-container .flyout #text p {
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+#corner-flyouts-container .flyout #close {
+  width: 75px;
+  height: 100%;
+  border: none;
+  border-radius: 0 10px 10px 0;
+  /*background-color: transparent;*/
+}
+
+/*# sourceMappingURL=corner-flyout.css.map */

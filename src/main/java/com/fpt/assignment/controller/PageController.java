@@ -1,6 +1,5 @@
 package com.fpt.assignment.controller;
 
-import com.fpt.assignment.exception.runtime.BackendException;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author User
  */
-@WebServlet(name = "ActionController", urlPatterns = {"/ActionController", "/action"})
-public class ActionController extends HttpServlet {
+@WebServlet(name = "PageController", urlPatterns = {"/PageController", "/home"})
+public class PageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -26,32 +25,25 @@ public class ActionController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action"), url;
-        action = action == null ? "" : action;
-
-        switch (action) {
+        String page = request.getParameter("page");
+        page = (page == null) ? "" : page;
+        String url, base = "WEB-INF/jsp/", extension = ".jsp";
+        switch (page) {
             case "login": {
-                url = "LoginServlet";
-                break;
-            }
-            case "register": {
-                url = "RegisterServlet";
-                break;
-            }
-            case "logout": {
-                url = "LogoutServlet";
+                url = "login";
                 break;
             }
             case "preview-quiz": {
                 url = "PreviewQuizServlet";
-                break;
+                request.getRequestDispatcher(url).forward(request, response);
+                return;
             }
             default: {
-                throw new BackendException();
+                url = "user-only/home";
+                break;
             }
         }
-
-        request.getRequestDispatcher(url).forward(request, response);
+        request.getRequestDispatcher(base + url + extension).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

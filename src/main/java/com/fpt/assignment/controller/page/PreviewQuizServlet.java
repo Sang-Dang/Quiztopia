@@ -1,6 +1,11 @@
-package com.fpt.assignment.controller;
+package com.fpt.assignment.controller.page;
 
-import com.fpt.assignment.exception.runtime.BackendException;
+import com.fpt.assignment.dto.Quiz;
+import com.fpt.assignment.exception.checked.ObjectNotFoundException;
+import com.fpt.assignment.exception.checked.ValidationException;
+import com.fpt.assignment.service.QuizService;
+import com.fpt.assignment.service.UserService;
+import com.fpt.assignment.util.Util;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author User
  */
-@WebServlet(name = "ActionController", urlPatterns = {"/ActionController", "/action"})
-public class ActionController extends HttpServlet {
+@WebServlet(name = "PreviewQuizServlet", urlPatterns = {"/PreviewQuizServlet"})
+public class PreviewQuizServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -26,32 +31,33 @@ public class ActionController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action"), url;
-        action = action == null ? "" : action;
+        String quizCode = request.getParameter("id");
+        String error;
 
-        switch (action) {
-            case "login": {
-                url = "LoginServlet";
-                break;
+        String currentURL = request.getHeader("referer");
+        currentURL = Util.removeSuccessAndError(currentURL);
+
+        try {
+            Quiz currentQuiz = QuizService.getQuizByCode(quizCode);
+            if(currentQuiz == null) {
+                throw new ObjectNotFoundException();
             }
-            case "register": {
-                url = "RegisterServlet";
-                break;
-            }
-            case "logout": {
-                url = "LogoutServlet";
-                break;
-            }
-            case "preview-quiz": {
-                url = "PreviewQuizServlet";
-                break;
-            }
-            default: {
-                throw new BackendException();
-            }
+            int questions = QuizService.getNumberOfQuestions(currentQuiz.getId().toString());
+            String user = UserService.getSafeUserById(currentQuiz.getUser_id()).getUsername();
+            request.setAttribute("creator", user);
+            request.setAttribute("noquestions", questions);
+            request.setAttribute("currentQuiz", currentQuiz);
+            request.getRequestDispatcher("WEB-INF/jsp/user-only/preview-quiz.jsp").forward(request, response);
+            return;
+        } catch (ValidationException ex) {
+            ex.printStackTrace();
+            error = "Invalid quiz code.";
+        } catch (ObjectNotFoundException ex) {
+            ex.printStackTrace();
+            error = "Quiz not found.";
         }
-
-        request.getRequestDispatcher(url).forward(request, response);
+        currentURL = Util.addURLParameters(currentURL, "error", error);
+        response.sendRedirect(currentURL);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

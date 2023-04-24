@@ -1,7 +1,13 @@
 package com.fpt.assignment.controller.action;
 
+import com.fpt.assignment.exception.checked.ValidationException;
+import com.fpt.assignment.exception.runtime.BackendException;
+import com.fpt.assignment.service.UserService;
+import com.fpt.assignment.util.Util;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +32,30 @@ public class RegisterServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String email = request.getParameter("email");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
         
+        String success, error;
+        
+        // get current requesting URL
+        String currentURL = request.getHeader("referer");
+        currentURL = Util.removeSuccessAndError(currentURL);
+        
+        try {
+            if(!UserService.registerDefaultUser(username, password, email)) {
+                throw new BackendException();
+            }
+            success = "Successfully registered user \"" + username + "\" Please log in!";
+            currentURL = Util.addURLParameters(currentURL, "success", success);
+            response.sendRedirect(currentURL);
+            return;
+        } catch (ValidationException ex) {
+            ex.printStackTrace();
+            error = "Inputs are in the wrong format. Please try again.";
+        }
+        currentURL = Util.addURLParameters(currentURL, "error", error);
+        response.sendRedirect(currentURL);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

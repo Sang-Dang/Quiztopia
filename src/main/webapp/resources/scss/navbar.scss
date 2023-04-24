@@ -1,0 +1,109 @@
+@import 'settings';
+
+i {
+    color: white;
+}
+
+#nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px $page-padding;
+    font-family: Montserrat;
+    background-color: $primary-color;
+
+    #nav-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        #main-page-name {
+            font-weight: 900;
+            font-size: 2rem;
+            transition: all 0.2s linear;
+            text-decoration: none;
+            a {
+                color: white !important;
+                text-decoration: none !important;
+            }
+        }
+
+        #nav-items {
+            display: flex;
+            gap: 1rem;
+
+            .nav-item {
+                list-style: none;
+
+                a {
+                    text-decoration: none;
+                    color: white;
+                }
+            }
+        }
+    }
+
+    #nav-functions {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+
+        #user-functions {
+            display: flex;
+            gap: 1rem;
+
+            .main-button {
+                text-decoration: none;
+                color: black;
+                background-color: $accent-color;
+                border-radius: 10px;
+                padding: 10px;
+                font-weight: 500;
+            }
+
+            #user {
+                position: relative;
+                min-width: 150px;
+
+                &:hover {
+                    .dropdown {
+                        transform: scaleY(1);
+                    }
+                }
+
+                p {
+                    display: inline-block;
+                    background-color: $primary-color;
+                    border-radius: 10px;
+                    padding: 10px 20px;
+                    color: white;
+                    font-weight: 500;
+                    width: 100%;
+                    text-align: center;
+                }
+
+                .dropdown {
+                    position: absolute;
+                    top: 80%;
+                    left: 0;
+                    display: flex;
+                    flex-direction:column;
+                    background-color: $primary-color;
+                    transform: scaleY(0);
+                    transform-origin: top;
+                    transition: all 0.2s linear;
+                    width: 100%;
+                    padding: 20px;
+                    border-radius: 0 0 10px 10px;
+
+                    .dropdown-button {
+                        text-decoration: none;
+                        color: white;
+                        font-weight: 300;
+                        font-size: .9rem;
+                    }
+                }
+            }
+        }
+    }
+}
+

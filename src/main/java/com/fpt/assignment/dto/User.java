@@ -7,8 +7,8 @@ public class User {
     private static final String TABLE_NAME = "users";
 
     public enum UserRole {
-        ADMIN("AD"),
-        USER("US"),
+        TEACHER("TS"),
+        STUDENT("US"),
         UNKNOWN("");
 
         String value;
@@ -104,6 +104,14 @@ public class User {
 
     public final void setRole(UserRole role) {
         this.role = role;
+    }
+    
+    public boolean isTeacher() {
+        return this.role.equals(UserRole.TEACHER);
+    }
+    
+    public boolean isStudent() {
+        return this.role.equals(UserRole.STUDENT);
     }
 
     @Override

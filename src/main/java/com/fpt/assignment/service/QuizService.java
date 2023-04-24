@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.UUID;
 
 import com.fpt.assignment.database.dao.AnswerDAO;
+import com.fpt.assignment.database.dao.QuestionDAO;
 import com.fpt.assignment.database.dao.QuizDAO;
 import com.fpt.assignment.dto.Answer;
+import com.fpt.assignment.dto.Question;
 import com.fpt.assignment.dto.Quiz;
 import com.fpt.assignment.exception.checked.ValidationException;
 import com.fpt.assignment.exception.checked.validate.UUIDParseException;
@@ -128,6 +130,24 @@ public class QuizService {
 
             returnValue = quizDAO.addWithReturn(current);
             quizDAO.finalize(returnValue != null);
+        }
+        return returnValue;
+    }
+
+    public static Quiz getQuizById(String id) throws UUIDParseException {
+        Quiz returnValue = null;
+        try (QuizDAO quizDAO = new QuizDAO(Quiz.class)) {
+            UUID quizId = Converter.toUUID(id);
+            returnValue = quizDAO.searchById(quizId);
+        }
+        return returnValue;
+    }
+
+    public static int getNumberOfQuestions(String id) throws UUIDParseException {
+        int returnValue = 0;
+        try (QuestionDAO questionDAO = new QuestionDAO(Question.class)) {
+            UUID quizId = Converter.toUUID(id);
+            returnValue = questionDAO.getNumberOfQuestionsByQuizId(quizId);
         }
         return returnValue;
     }
