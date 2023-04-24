@@ -8,51 +8,51 @@ DELETE FROM [users];
 
 -- INSERT INTO USERS
 INSERT INTO [users]
-    (username, password, email, role)
+    (id, username, password, email, role)
 VALUES
-    ('admin', '12345', 'admin@gmail.com', 'AD')
+    ('765DCFE9-FC14-4B06-9B50-E3CD3CBFFE72', 'admin', '12345', 'admin@gmail.com', 'AD')
 INSERT INTO [users]
-    (username, password, email, role)
+    (id, username, password, email, role)
 VALUES
-    ('user', '12345', 'user@gmail.com', 'US')
+    ('97CDC05C-1824-4149-A4DC-F9CE663C7EB6', 'user', '12345', 'user@gmail.com', 'US')
 
 -- INSERT INTO QUIZZES
 INSERT INTO [quizzes]
-    (title, description, user_id)
+    (title, description, user_id, code)
 VALUES
     ('Math', 'A quiz about maths', (SELECT id
         FROM users
-        WHERE username = 'admin'));
+        WHERE username = 'admin'), 'A1fr33');
 INSERT INTO [quizzes]
-    (title, description, user_id)
+    (title, description, user_id, code)
 VALUES
     ('History', 'A quiz about history', (SELECT id
         FROM users
-        WHERE username = 'admin'));
+        WHERE username = 'admin'), 'Pore12');
 INSERT INTO [quizzes]
-    (title, description, user_id)
+    (title, description, user_id, code)
 VALUES
     ('Geography', 'A quiz about geography', (SELECT id
         FROM users
-        WHERE username = 'user'));
+        WHERE username = 'user'), '24J22A');
 INSERT INTO [quizzes]
-    (title, description, user_id)
+    (title, description, user_id, code)
 VALUES
     ('Science', 'A quiz about science', (SELECT id
         FROM users
-        WHERE username = 'user'));
+        WHERE username = 'user'), 'LfgeAD');
 INSERT INTO [quizzes]
-    (title, description, user_id)
+    (title, description, user_id, code)
 VALUES
     ('English', 'A quiz about english', (SELECT id
         FROM users
-        WHERE username = 'user'));
+        WHERE username = 'user'), 'fdWEWS');
 INSERT INTO [quizzes]
-    (title, description, user_id)
+    (title, description, user_id, code)
 VALUES
     ('Programming', 'A quiz about programming', (SELECT id
         FROM users
-        WHERE username = 'admin'));
+        WHERE username = 'admin'), '321JFD');
 
 -- INSERT INTO QUESTIONS
 INSERT INTO [questions]

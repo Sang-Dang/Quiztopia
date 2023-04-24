@@ -30,7 +30,6 @@ public class QuizDAO extends AbstractDAO<Quiz> {
         statement.setDate(index++, Date.valueOf(entity.getCreated_at()));
         statement.setObject(index++, entity.getUser_id());
         statement.setObject(index++, entity.getPassword());
-        statement.setBoolean(index++, entity.getIs_public());
         statement.setString(index++, entity.getCode());
         if (update) {
             statement.setObject(index++, entity.getId());
@@ -46,7 +45,6 @@ public class QuizDAO extends AbstractDAO<Quiz> {
         returnValue.setCreated_at(resultSet.getDate("created_at").toLocalDate());
         returnValue.setUser_id(resultSet.getObject("user_id", UUID.class));
         returnValue.setPassword(resultSet.getString("password"));
-        returnValue.setIs_public(resultSet.getBoolean("is_public"));
         returnValue.setCode(resultSet.getString("code"));
         return returnValue;
     }

@@ -24,7 +24,6 @@ public class QuizValidator extends AbstractValidator<Quiz> {
         validateCreated_at(object.getCreated_at());
         validateUser_id(object.getUser_id());
         validatePassword(object.getPassword());
-        validateIs_public(object.getIs_public());
         validateCode(object.getCode());
     }
 
@@ -35,7 +34,6 @@ public class QuizValidator extends AbstractValidator<Quiz> {
         validateCreated_at(object.getCreated_at());
         validateUser_id(object.getUser_id());
         validatePassword(object.getPassword());
-        validateIs_public(object.getIs_public());
         validateCode(object.getCode());
     }
     
@@ -59,10 +57,6 @@ public class QuizValidator extends AbstractValidator<Quiz> {
         if(password != null)  {
             lengthString(password, 255);
         }
-    }
-
-    public void validateIs_public(Boolean is_public) throws ValidationException {
-        nullObject(is_public);
     }
 
     public void validateCode(String code) throws ValidationException {
