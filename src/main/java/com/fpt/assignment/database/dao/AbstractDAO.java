@@ -197,10 +197,14 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T>, AutoCloseable {
         return String.join(", ", questionMarks);
     }
 
-    protected String getAddQuery() {
+    protected String getTableColumnNamesAsQuestionMarksWithoutId() {
         String question = getTableColumnNamesAsQuestionMarks();
+        return question.substring(0, question.length() - 3);
+    }
+
+    protected String getAddQuery() {
         return String.format(SQL.query("ADD"), getTableName(), getTableColumnNamesAsStringWithoutId(),
-                question.substring(0, question.length() - 3));
+                getTableColumnNamesAsQuestionMarksWithoutId());
     }
 
     protected String getUpdateQuery() {

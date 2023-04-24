@@ -56,6 +56,23 @@ public class QuizDAO extends AbstractDAO<Quiz> {
         return Quiz.getTableName();
     }
 
+    public UUID addWithReturn(Quiz entity) {
+        UUID returnValue = null;
+        try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("ADD_RETURN_ID"), getTableName(), getTableColumnNamesAsStringWithoutId(), getTableColumnNamesAsQuestionMarksWithoutId()))) {
+            setDMLQueryParameters(statement, entity, false);
+            if(statement.executeUpdate() == 1) {
+                try (ResultSet resultSet = statement.getGeneratedKeys()) {
+                    if (resultSet.next()) {
+                        returnValue = resultSet.getObject(1, UUID.class);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return returnValue;
+    }
+
     public List<Quiz> getPublicQuizzes() {
         List<Quiz> returnValue = null;
         if (connection != null) {
@@ -76,12 +93,47 @@ public class QuizDAO extends AbstractDAO<Quiz> {
     public List<Quiz> getQuizzesByUser(UUID userId) {
         List<Quiz> returnValue = null;
         if (connection != null) {
-            try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("QUIZ_SELECT_BY_USER"), getTableColumnNamesAsString(), getTableName()))) {
+            try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("SELECT_BY_USER"), getTableColumnNamesAsString(), getTableName()))) {
                 statement.setObject(1, userId);
                 try (ResultSet resultSet = statement.executeQuery()) {
                     returnValue = new ArrayList<>();
                     while (resultSet.next()) {
                         returnValue.add(setSelectionQueryParameters(resultSet));
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return returnValue;
+    }
+
+    public Quiz getQuizByCode(String code) {
+        Quiz returnValue = null;
+        if (connection != null) {
+            try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("QUIZ_SELECT_BY_CODE"), getTableColumnNamesAsString(), getTableName()))) {
+                statement.setString(1, code);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        returnValue = setSelectionQueryParameters(resultSet);
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return returnValue;
+    }
+
+    public UUID loginToQuiz(String code, String password) {
+        UUID returnValue = null;
+        if (connection != null) {
+            try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("QUIZ_LOGIN"), getTableColumnNamesAsString(), getTableName()))) {
+                statement.setString(1, code);
+                statement.setString(2, password);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        returnValue = resultSet.getObject("id", UUID.class);
                     }
                 }
             } catch (SQLException e) {

@@ -21,6 +21,14 @@ public class UserValidator extends AbstractValidator<User> {
         validateRole(object.getRole());
     }
 
+    @Override
+    public void validateNoId() throws ValidationException {
+        validateUsername(object.getUsername());
+        validatePassword(object.getPassword());
+        validateEmail(object.getEmail());
+        validateRole(object.getRole());
+    }
+
     public void validateUsername(String username) throws ValidationException {
         lengthString(username, 50);
     }

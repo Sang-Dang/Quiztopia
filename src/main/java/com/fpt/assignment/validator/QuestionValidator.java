@@ -21,6 +21,12 @@ public class QuestionValidator extends AbstractValidator<Question> {
         validateQuiz_id(object.getQuiz_id());
         validateQuestion(object.getQuestion());
     }
+
+    @Override
+    public void validateNoId() throws ValidationException {
+        validateQuiz_id(object.getQuiz_id());
+        validateQuestion(object.getQuestion());
+    }
     
     public void validateQuiz_id(UUID quiz_id) throws ValidationException {
         nullObject(quiz_id);

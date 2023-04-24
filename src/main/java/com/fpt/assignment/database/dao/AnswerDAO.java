@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import com.fpt.assignment.database.util.SQL;
 import com.fpt.assignment.dto.Answer;
 
 public class AnswerDAO extends AbstractDAO<Answer> {
@@ -44,6 +47,57 @@ public class AnswerDAO extends AbstractDAO<Answer> {
     protected String getTableNameRaw() {
         return Answer.getTableName();
     }
+
+    public UUID addWithReturn(Answer entity) {
+        UUID returnValue = null;
+        try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("ADD_RETURN_ID"), getTableName(), getTableColumnNamesAsStringWithoutId(), getTableColumnNamesAsQuestionMarksWithoutId()))) {
+            setDMLQueryParameters(statement, entity, false);
+            if(statement.executeUpdate() == 1) {
+                try (ResultSet resultSet = statement.getGeneratedKeys()) {
+                    if (resultSet.next()) {
+                        returnValue = resultSet.getObject(1, UUID.class);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public List<Answer> getAnswersByQuestionId(UUID questionId) {
+        List<Answer> returnValue = null;
+        try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("ANSWERS_GET_ANSWERS_BY_QUESTIONID"), getTableColumnNamesAsString(), getTableName()))) {
+            statement.setObject(1, questionId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet != null) {
+                    returnValue = new ArrayList<>();
+                    while (resultSet.next()) {
+                        returnValue.add(setSelectionQueryParameters(resultSet));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
     
-    
+    public List<Answer> getCorrectAnswerByQuestionId(UUID questionId) {
+        List<Answer> returnValue = null;
+        try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("ANSWERS_GET_CORRECT_ANSWER"), getTableColumnNamesAsString(), getTableName()))) {
+            statement.setObject(1, questionId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet != null) {
+                    returnValue = new ArrayList<>();
+                    while (resultSet.next()) {
+                        returnValue.add(setSelectionQueryParameters(resultSet));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
 }

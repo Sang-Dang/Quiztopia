@@ -8,6 +8,10 @@ import com.fpt.assignment.exception.checked.ValidationException;
 
 public class QuizValidator extends AbstractValidator<Quiz> {
 
+    public QuizValidator() {
+        super();
+    }
+
     public QuizValidator(Quiz object) {
         super(object);
     }
@@ -15,6 +19,17 @@ public class QuizValidator extends AbstractValidator<Quiz> {
     @Override
     public void validate() throws ValidationException {
         validateId(object.getId());
+        validateTitle(object.getTitle());
+        validateDescription(object.getDescription());
+        validateCreated_at(object.getCreated_at());
+        validateUser_id(object.getUser_id());
+        validatePassword(object.getPassword());
+        validateIs_public(object.getIs_public());
+        validateCode(object.getCode());
+    }
+
+    @Override
+    public void validateNoId() throws ValidationException {
         validateTitle(object.getTitle());
         validateDescription(object.getDescription());
         validateCreated_at(object.getCreated_at());

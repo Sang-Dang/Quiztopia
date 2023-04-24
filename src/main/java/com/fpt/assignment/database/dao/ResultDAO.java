@@ -5,8 +5,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import com.fpt.assignment.database.util.SQL;
 import com.fpt.assignment.dto.Result;
 
 public class ResultDAO extends AbstractDAO<Result> {
@@ -46,5 +49,23 @@ public class ResultDAO extends AbstractDAO<Result> {
     @Override
     protected String getTableNameRaw() {
         return Result.getTableName();
+    }
+
+    public List<Result> getResultsByUserId(UUID userId){
+        List<Result> returnValue = null;
+        try (PreparedStatement statement = getConnection().prepareStatement(String.format(SQL.query("SELECT_BY_USERID"), getTableName(), getTableColumnNamesAsString()))) {
+            statement.setObject(1, userId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if(resultSet != null) {
+                    returnValue = new ArrayList<>();
+                    while (resultSet.next()) {
+                        returnValue.add(setSelectionQueryParameters(resultSet));
+                    }
+                }
+            } 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
     }
 }

@@ -23,6 +23,13 @@ public class AnswerValidator extends AbstractValidator<Answer> {
         validateIs_correct(object.getIs_correct());
     }
 
+    @Override
+    public void validateNoId() throws ValidationException {
+        validateQuestion_id(object.getQuestion_id());
+        validateAnswer(object.getAnswer());
+        validateIs_correct(object.getIs_correct());
+    }
+
     public void validateQuestion_id(UUID question_id) throws ValidationException {
         nullObject(question_id);
     }

@@ -17,7 +17,8 @@ public abstract class AbstractValidator<T> {
         this.object = object;
     }
 
-    public abstract void validate() throws  ValidationException;
+    public abstract void validate() throws ValidationException;
+    public abstract void validateNoId() throws ValidationException;
 
     public boolean fastValidate() {
         try {
