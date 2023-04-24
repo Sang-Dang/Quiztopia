@@ -1,5 +1,6 @@
 package com.fpt.assignment.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,7 @@ import com.fpt.assignment.dto.Answer;
 import com.fpt.assignment.dto.Quiz;
 import com.fpt.assignment.exception.checked.ValidationException;
 import com.fpt.assignment.exception.checked.validate.UUIDParseException;
+import com.fpt.assignment.util.CodeGenerator;
 import com.fpt.assignment.util.Converter;
 import com.fpt.assignment.validator.QuizValidator;
 
@@ -105,12 +107,11 @@ public class QuizService {
      * @param title Title of the quiz
      * @param description Description of the quiz
      * @param password Password of the quiz
-     * @param isPublic Is the quiz public
      * @return Id of the new quiz
      * @throws ValidationException If any parameters are invalid
      * @throws UUIDParseException If the userId is not a valid UUID
      */
-    public static UUID createQuiz(String userId, String title, String description, String password, boolean isPublic) throws ValidationException, UUIDParseException {
+    public static UUID createQuiz(String userId, String title, String description, String password) throws ValidationException, UUIDParseException {
         UUID returnValue = null;
         try (QuizDAO quizDAO = new QuizDAO(Quiz.class)) {
             UUID user_id = Converter.toUUID(userId);
@@ -119,7 +120,8 @@ public class QuizService {
             current.setTitle(title);
             current.setDescription(description);
             current.setPassword(password);
-            current.setIs_public(isPublic);
+            current.setCode(CodeGenerator.generateCode());
+            current.setCreated_at(LocalDate.now());
 
             QuizValidator validator = new QuizValidator(current);
             validator.validateNoId();
@@ -128,5 +130,9 @@ public class QuizService {
             quizDAO.finalize(returnValue != null);
         }
         return returnValue;
+    }
+
+    public static void main(String[] args) throws Exception {
+        System.out.println(createQuiz("765DCFE9-FC14-4B06-9B50-E3CD3CBFFE72", "Pop Quiz", "This is a pop quiz", null));
     }
 }

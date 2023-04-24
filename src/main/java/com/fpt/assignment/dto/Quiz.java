@@ -12,19 +12,17 @@ public class Quiz {
     private LocalDate created_at;
     private UUID user_id;
     private String password;
-    private boolean is_public;
     private String code;
 
     public Quiz() {}
 
-    public Quiz(UUID id, String title, String description, LocalDate created_at, UUID userId, String password, boolean is_public, String code) {
+    public Quiz(UUID id, String title, String description, LocalDate created_at, UUID userId, String password, String code) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.created_at = created_at;
         this.user_id = userId;
         this.password = password;
-        this.is_public = is_public;
         this.code = code;
     }
 
@@ -72,12 +70,8 @@ public class Quiz {
         this.password = password;
     }
 
-    public boolean getIs_public() {
-        return is_public;
-    }
-
-    public void setIs_public(boolean is_public) {
-        this.is_public = is_public;
+    public boolean isPublic() {
+        return password == null;
     }
 
     public UUID getUser_id() {

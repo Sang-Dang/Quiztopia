@@ -11,7 +11,7 @@ public enum SQL {
     USER_SELECT_BY_USERNAME ("SELECT id FROM %s WHERE username = ?;"),
     USER_SELECT_BY_EMAIL ("SELECT id FROM %s WHERE email = ?;"),
     USER_SELECT_BY_USERNAME_PASSWORD ("SELECT id FROM %s WHERE username = ? AND password = ?;"),
-    QUIZ_SELECT_PUBLIC ("SELECT %s FROM %s WHERE is_public = 1;"),
+    QUIZ_SELECT_PUBLIC ("SELECT %s FROM %s WHERE password IS NOT NULL;"),
     QUIZ_SELECT_BY_CODE ("SELECT %s FROM %s WHERE code = ?;"),
     QUIZ_LOGIN ("SELECT id FROM %s WHERE code = ? AND password = ?;"),
     QUESTIONS_GET_QUESTIONS_BY_QUIZID ("SELECT %s FROM %s WHERE quiz_id = ?;"),
