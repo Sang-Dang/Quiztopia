@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class LoginServlet extends HttpServlet {
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+
+    public static void login(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
 
         // Get the username and password submitted by the user
         String username = request.getParameter("username");
@@ -32,9 +32,7 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    private boolean validateUser(String username, String password) {
-        // TODO: Implement the database validation logic here
-        // For example, you could use JDBC to connect to the database and query the user table
-        return false;
+    private static boolean validateUser(String username, String password) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

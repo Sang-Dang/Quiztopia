@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class RegisterServlet extends HttpServlet {
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+
+    public static void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Get the registration data submitted by the user
         String username = request.getParameter("username");
@@ -33,15 +33,17 @@ public class RegisterServlet extends HttpServlet {
         }
     }
 
-    private boolean validateRegistration(String username, String password, String email) {
+    private static boolean saveRegistrationData(String username, String password, String email) {
         // TODO: Implement validation logic for registration data
         // For example, you could check if the username and email are unique,
         // if the password meets certain requirements, etc.
-        return false;
+        return false;    
     }
 
-    private void saveRegistrationData(String username, String password, String email) {
+    private static boolean validateRegistration(String username, String password, String email) {
+        return false;
         // TODO: Implement saving of registration data to the database
         // For example, you could use JDBC to connect to the database and insert a new user record
     }
+
 }
