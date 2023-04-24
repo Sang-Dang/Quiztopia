@@ -1,75 +1,47 @@
 package com.fpt.assignment.controller.action;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author User
- */
-@WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet"})
 public class RegisterServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/register.jsp");
-        dispatcher.forward(request, response);
+
+        // Get the registration data submitted by the user
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        // Add any additional fields as needed
+
+        // Validate the registration data
+        boolean isValidRegistration = validateRegistration(username, password, email);
+
+        if (isValidRegistration) {
+            // If the registration data is valid, save it to the database
+            saveRegistrationData(username, password, email);
+            
+            // Redirect the user to a success page
+            response.sendRedirect(request.getContextPath() + "/registration-success.jsp");
+        } else {
+            // If the registration data is not valid, display an error message
+            request.setAttribute("errorMessage", "Invalid registration data");
+            request.getRequestDispatcher("/register.jsp").forward(request, response);
+        }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-       String username = request.getParameter("username");
-    String password = request.getParameter("password");
-    String confirmPassword = request.getParameter("confirmPassword");
-    String email = request.getParameter("email");
-    
-    // Validate user input
-    if (username == null || username.trim().isEmpty() ||
-        password == null || password.trim().isEmpty() ||
-        confirmPassword == null || confirmPassword.trim().isEmpty() ||
-        email == null || email.trim().isEmpty()) {
-      // Display an error message if any fields are empty
-      request.setAttribute("error", "All fields are required.");
-      RequestDispatcher dispatcher = request.getRequestDispatcher("/register.jsp");
-      dispatcher.forward(request, response);
-    } else if (!password.equals(confirmPassword)) {
-      // Display an error message if the password and confirm password do not match
-      request.setAttribute("error", "Passwords do not match.");
-      RequestDispatcher dispatcher = request.getRequestDispatcher("/register.jsp");
-      dispatcher.forward(request, response);
-    } else {
-      // Create a new user object and save it to the database
-      User user = new User(username, password, email);
-      UserDao userDao = new UserDao();
-      userDao.addUser(user);
-      
-      // Set the user object as a session attribute and redirect to the home page
-      request.getSession().setAttribute("user", user);
-      response.sendRedirect(request.getContextPath() + "/home");
-    }
+    private boolean validateRegistration(String username, String password, String email) {
+        // TODO: Implement validation logic for registration data
+        // For example, you could check if the username and email are unique,
+        // if the password meets certain requirements, etc.
+        return false;
     }
 
+    private void saveRegistrationData(String username, String password, String email) {
+        // TODO: Implement saving of registration data to the database
+        // For example, you could use JDBC to connect to the database and insert a new user record
+    }
 }
