@@ -64,6 +64,5 @@
 
 ## Database design
 ER Diagram:
-![image](https://user-images.githubusercontent.com/92671777/233800963-69730413-f703-4f94-bc10-987340e1b851.png)
-
+![image](https://user-images.githubusercontent.com/92671777/233877568-ef289d8a-1f29-4e5d-8ccc-eecaf1d60f2d.png)
 
