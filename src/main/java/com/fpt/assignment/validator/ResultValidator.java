@@ -40,6 +40,6 @@ public class ResultValidator extends AbstractValidator<Result> {
     }
 
     public void validateScore(int score) throws ValidationException {
-        sizeInt(score, 0, Integer.MAX_VALUE, false);
+        sizeInt(score, 0, Integer.MAX_VALUE, true);
     }
 }

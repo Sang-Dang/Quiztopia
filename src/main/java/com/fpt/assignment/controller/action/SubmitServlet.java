@@ -45,8 +45,6 @@ public class SubmitServlet extends HttpServlet {
             answerSet.put(i, answers);
         }
         
-        System.out.println(answerSet);
-        
         HttpSession session = request.getSession(false);
         UUID userId = (UUID) session.getAttribute("currentUserId");
         String quizId = request.getParameter("quizId");
