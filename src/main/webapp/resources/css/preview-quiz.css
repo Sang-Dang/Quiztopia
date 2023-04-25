@@ -1,0 +1,67 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 25, 2023, 10:49:03 AM
+    Author     : THANGNGUYEN
+*/
+
+/* This is preview-quiz.css */
+
+/* Reset the default styles of HTML elements */
+#main-container {
+  margin: 20px auto;
+  width: 80%;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f0f0f0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+p {
+      text-align: center;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+h3 {
+  margin-bottom: 10px;
+  color: #666;
+}
+
+h4 {
+  margin-top: 10px;
+  color: #333;
+}
+
+.form-check {
+  margin-left: 20px;
+}
+
+.form-check-input {
+  margin-right: 10px;
+}
+
+hr {
+  border-top: 1px dashed #ccc;
+}
+
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+table td {
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+table input[type=submit] {
+  display: block;
+  margin: 0 auto;
+}
