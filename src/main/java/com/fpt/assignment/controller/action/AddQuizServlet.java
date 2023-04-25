@@ -44,16 +44,23 @@ public class AddQuizServlet extends HttpServlet {
 
         String[] questions = request.getParameterValues("question");
         String[] correctAnswers = request.getParameterValues("answer");
-        
+
         System.out.println(title + " " + description + " " + password);
         System.out.println("Questions:");
-        for(String i: questions) {
+        for (String i : questions) {
             System.out.println(i);
         }
-        System.out.println("Answers:");
-        System.out.println(correctAnswers);
-        
-        
+        for (int i = 0; i < questions.length; i++) {
+            String current = null;
+            int index = 1;
+            do {
+                current = request.getParameter(String.format(ANSWER_FORMAT, i, index));
+                System.out.println(String.format(ANSWER_FORMAT, i, index));
+                System.out.println(current);
+                index++;
+            } while (current != null);
+        }
+
 //        List<String> correct = Arrays.asList(correctAnswers);
 //        if (password.isEmpty()) {
 //            password = null;
@@ -74,7 +81,6 @@ public class AddQuizServlet extends HttpServlet {
 //            } while (true);
 //            index++;
 //        }
-
 //        try {
 //            // create the quiz
 //            UUID quizId = QuizService.createQuiz(userId.toString(), title, description, password);
