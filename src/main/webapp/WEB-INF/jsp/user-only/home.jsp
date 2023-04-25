@@ -13,6 +13,7 @@
         <title>Home | ${initParam.sitename}</title>
         <s:CSSReset/>
         <s:GeneralCSS filename="home"/>
+        <s:GeneralCSS filename="home1"/>
     </head>
     <body>
         <comp:navbar/>

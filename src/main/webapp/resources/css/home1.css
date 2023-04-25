@@ -1,0 +1,84 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 25, 2023, 9:57:35 AM
+    Author     : THANGNGUYEN
+*/
+/* This is home1.css */
+
+/* Reset the default styles of HTML elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Set the font family and size for the body element */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+/* Set the width and margin for the main container element */
+#main-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* Set the background color and padding for the public quizzes section */
+#public-quizzes {
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+/* Set the border collapse and spacing for the table element */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 0 auto;
+}
+
+/* Set the border style and color for the table cells */
+td, th {
+  border: 1px solid #cccccc;
+}
+
+/* Set the padding and text alignment for the table cells */
+td, th {
+  padding: 10px;
+  text-align: left;
+}
+
+/* Set the font size and weight for the table header cells */
+th {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Set the font size and weight for the table title cell */
+td[colspan="100%"] {
+  font-size: 24px;
+  font-weight: normal;
+}
+
+td:hover {
+  background-color: #ffff99;
+}
+
+/* Set the width and margin for the input elements */
+input[type="text"], input[type="submit"], select {
+  width: 200px;
+  margin: 5px;
+}
+
+/* Set the cursor style for the submit button */
+input[type="submit"] {
+  cursor: pointer;
+}
+
+#private-quizzes {
+  text-align: center;
+}
