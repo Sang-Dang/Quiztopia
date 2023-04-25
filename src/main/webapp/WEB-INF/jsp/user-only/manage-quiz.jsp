@@ -20,7 +20,7 @@
                     <th>Description</th>
                     <th>Created at</th>
                     <th>Password</th>
-                    <th></th>
+                    <th>Functions</th>
                 </tr>
                 <c:forEach var="quiz" items="${list}">
                     <tr>
@@ -29,6 +29,10 @@
                         <td>${quiz.getDescription()}</td>
                         <td>${quiz.getCreated_at()}</td>
                         <td>${quiz.getPassword()}</td>
+                        <td>
+                            <a href="home?page=view-quiz&id=${quiz.getCode()}"><button>View Quiz</button></a>
+                            <a href="action?action=delete-quiz&id=${quiz.getCode()}"><button>Delete Quiz</button></a>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>

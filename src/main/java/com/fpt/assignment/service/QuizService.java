@@ -177,6 +177,16 @@ public class QuizService {
         }
         return returnValue;
     }
+
+    public static boolean deleteQuiz(String quizId) throws UUIDParseException {
+        boolean returnValue = false;
+        try (QuizDAO quizDAO = new QuizDAO(Quiz.class)) {
+            UUID id = Converter.toUUID(quizId);
+            returnValue = quizDAO.remove(id) > 0;
+            quizDAO.finalize(returnValue);
+        }
+        return returnValue;
+    }
     
     public static void main(String[] args) throws Exception {
         System.out.println(createQuiz("765DCFE9-FC14-4B06-9B50-E3CD3CBFFE72", "Pop Quiz", "This is a pop quiz", null));

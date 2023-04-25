@@ -1,5 +1,9 @@
-package com.fpt.assignment.controller.action;
+package com.fpt.assignment.controller.page;
 
+import com.fpt.assignment.dto.Answer;
+import com.fpt.assignment.dto.Question;
+import com.fpt.assignment.dto.Quiz;
+import com.fpt.assignment.exception.checked.ObjectNotFoundException;
 import com.fpt.assignment.exception.checked.ValidationException;
 import com.fpt.assignment.service.AnswerService;
 import com.fpt.assignment.service.QuestionService;
@@ -7,9 +11,10 @@ import com.fpt.assignment.service.QuizService;
 import com.fpt.assignment.util.Util;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +26,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author User
  */
-@WebServlet(name = "AddQuizServlet", urlPatterns = {"/AddQuizServlet"})
-public class AddQuizServlet extends HttpServlet {
+@WebServlet(name = "ViewQuizServlet", urlPatterns = {"/ViewQuizServlet"})
+public class ViewQuizServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,50 +40,34 @@ public class AddQuizServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        final String ANSWER_FORMAT = "question_%s_answer_%s";
-        String success, error;
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
-        String password = request.getParameter("password");
-        if(password.isEmpty()) {
-            password = null;
-        }
+        String error;
+        String quizCode = request.getParameter("id");
         HttpSession session = request.getSession(false);
-        UUID userId = (UUID) session.getAttribute("currentUserId");
-
-        String[] questions = request.getParameterValues("question");
-        String[] correctAnswers = request.getParameterValues("answer");
-        List<String> correct = new ArrayList<>();
-        if (correctAnswers != null) {
-            correct = Arrays.asList(correctAnswers);
-        }
-
+        UUID loggedIn = (UUID)session.getAttribute("currentUserId");
         try {
-            UUID quizId = QuizService.createQuiz(userId.toString(), title, description, password);
-
-            for (int i = 0; i < questions.length; i++) {
-                UUID questionId = QuestionService.createQuestion(quizId.toString(), questions[i]);
-
-                String currentAnswer = null;
-                int index = 1;
-                do {
-                    String currentAnswerName = String.format(ANSWER_FORMAT, i, index);
-                    currentAnswer = request.getParameter(currentAnswerName);
-                    if (currentAnswer != null) {
-                        System.out.println("Adding answer: \"" + currentAnswerName + "\" with value " + currentAnswer + ".");
-                        AnswerService.createAnswer(questionId.toString(), currentAnswer, correct.contains(currentAnswerName));
-                    }
-                    index++;
-                } while (currentAnswer != null);
+            Quiz currentQuiz = QuizService.getQuizByCode(quizCode);
+            UUID quizCreator = currentQuiz.getUser_id();
+            if(!loggedIn.equals(quizCreator)) {
+                throw new ObjectNotFoundException();
             }
-            success = "Quiz created!";
-            response.sendRedirect("home?page=manage-quizzes&success=" + Util.encode(success));
+            List<Question> questions = QuestionService.getQuestionsByQuizId(currentQuiz.getId().toString());
+            List<Answer> answers = new ArrayList<>();
+            for(Question i: questions) {
+                answers.addAll(AnswerService.getAnswersByQuestionId(i.getId().toString()));
+            }
+            request.setAttribute("quiz", currentQuiz);
+            request.setAttribute("questions", questions);
+            request.setAttribute("answers", answers);
+            request.getRequestDispatcher("WEB-INF/jsp/user-only/view-quiz.jsp").forward(request, response);
             return;
         } catch (ValidationException ex) {
-            ex.printStackTrace();
             error = ex.getMessage();
+            ex.printStackTrace();
+        } catch (ObjectNotFoundException ex) {
+            error = "You are not allowed to view this.";
+            ex.printStackTrace();
         }
-        response.sendRedirect("home?page=add-quiz&error=" + Util.encode(error));
+        response.sendRedirect("home?error=" + Util.encode(error));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

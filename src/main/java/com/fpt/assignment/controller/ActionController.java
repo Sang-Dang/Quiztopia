@@ -50,6 +50,10 @@ public class ActionController extends HttpServlet {
                 url = "AddQuizServlet";
                 break;
             }
+            case "delete-quiz": {
+                url = "DeleteQuizServlet";
+                break;
+            }
             default: {
                 throw new BackendException();
             }
