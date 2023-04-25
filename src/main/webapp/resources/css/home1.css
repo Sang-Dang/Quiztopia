@@ -30,7 +30,7 @@ body {
 
 /* Set the background color and padding for the public quizzes section */
 #public-quizzes {
-  background-color: #f0f0f0;
+  background-color: #e6f2ff;
   padding: 20px;
 }
 
@@ -38,12 +38,11 @@ body {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-  margin: 0 auto;
 }
 
 /* Set the border style and color for the table cells */
 td, th {
-  border: 1px solid #cccccc;
+  border: 1px solid #99ccff;
 }
 
 /* Set the padding and text alignment for the table cells */
@@ -64,10 +63,6 @@ td[colspan="100%"] {
   font-weight: normal;
 }
 
-td:hover {
-  background-color: #ffff99;
-}
-
 /* Set the width and margin for the input elements */
 input[type="text"], input[type="submit"], select {
   width: 200px;
@@ -79,6 +74,29 @@ input[type="submit"] {
   cursor: pointer;
 }
 
+/* Center the table horizontally */
+table {
+  margin: 0 auto;
+}
+
+table {
+  width: 1000px;
+  height: 800px;
+}
+
+/* Center the public quizzes title */
+td[colspan="100%"] {
+  text-align: center;
+}
+
+/* Center the private quizzes section */
 #private-quizzes {
   text-align: center;
+}
+
+/* Make the round frame more oval-shaped */
+#private-quizzes {
+  border: 5px solid transparent;
+  border-radius: 70% 30%;
+  border-image-slice: 1;
 }
