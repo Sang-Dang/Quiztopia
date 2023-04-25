@@ -10,6 +10,7 @@
         <s:GeneralCSS filename="login"/>
     </head>
     <body>
+        <comp:navbar></comp:navbar>
         <div id="main-container">
             <section id="login-section">
                 <h2>Login</h2>
