@@ -91,7 +91,7 @@ public class QuizDAO extends AbstractDAO<Quiz> {
     public List<Quiz> getQuizzesByUser(UUID userId) {
         List<Quiz> returnValue = null;
         if (connection != null) {
-            try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("SELECT_BY_USER"), getTableColumnNamesAsString(), getTableName()))) {
+            try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("SELECT_BY_USER_ID"), getTableColumnNamesAsString(), getTableName()))) {
                 statement.setObject(1, userId);
                 try (ResultSet resultSet = statement.executeQuery()) {
                     returnValue = new ArrayList<>();

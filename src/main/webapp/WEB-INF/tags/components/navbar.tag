@@ -24,7 +24,7 @@
         <ul id="nav-items">
             <li class="nav-item"><a href="home">Home</a></li>
             <c:if test="${currentUser.isTeacher()}">
-            <li class="nav-item"><a href="home?page=manage">Manage Quizzes</a></li>
+            <li class="nav-item"><a href="home?page=manage-quizzes">Manage Quizzes</a></li>
             </c:if>
         </ul>
     </header>
