@@ -17,6 +17,14 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
+    <servlet>
+        <servlet-name>SearchQuizServelet</servlet-name>
+        <servlet-class>com.fpt.assignment.controller.page.SearchQuizServelet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchQuizServelet</servlet-name>
+        <url-pattern>/SearchQuizServelet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

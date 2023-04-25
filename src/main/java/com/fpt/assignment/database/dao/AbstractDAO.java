@@ -112,8 +112,24 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T>, AutoCloseable {
     public T searchById(UUID id) {
         T returnValue = null;
         if (connection != null) {
-            try (PreparedStatement statement = connection.prepareStatement(getSearchByIdQuery())) {
+            try (PreparedStatement statement = connection.prepareStatement(getSearchTitleIdQuery())) {
                 statement.setObject(1, id);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        returnValue = setSelectionQueryParameters(resultSet);
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return returnValue;
+    }
+    public T searchByTitle(String title) {
+        T returnValue = null;
+        if (connection != null) {
+            try (PreparedStatement statement = connection.prepareStatement(getSearchByIdQuery())) {
+                statement.setObject(1, title);
                 try (ResultSet resultSet = statement.executeQuery()) {
                     if (resultSet.next()) {
                         returnValue = setSelectionQueryParameters(resultSet);
@@ -252,4 +268,8 @@ public abstract class AbstractDAO<T> implements InterfaceDAO<T>, AutoCloseable {
     protected abstract T setSelectionQueryParameters(ResultSet resultSet) throws SQLException;
 
     protected abstract String getTableNameRaw();
+
+    protected String getSearchTitleIdQuery() {
+        return String.format(SQL.query("SELECT"), getTableColumnNamesAsString(), getTableName());
+    }
 }
