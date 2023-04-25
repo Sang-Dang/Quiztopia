@@ -1,18 +1,26 @@
-package com.fpt.assignment.controller;
+package com.fpt.assignment.controller.page;
 
+import com.fpt.assignment.dto.Quiz;
+import com.fpt.assignment.exception.checked.validate.UUIDParseException;
+import com.fpt.assignment.service.QuizService;
 import java.io.IOException;
+import java.util.List;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author User
  */
-@WebServlet(name = "PageController", urlPatterns = {"/PageController", "/home"})
-public class PageController extends HttpServlet {
+@WebServlet(name = "ViewManageQuizServlet", urlPatterns = {"/ViewManageQuizServlet"})
+public class ViewManageQuizServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -25,34 +33,16 @@ public class PageController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String page = request.getParameter("page");
-        page = (page == null) ? "" : page;
-        String url, base = "WEB-INF/jsp/", extension = ".jsp";
-        switch (page) {
-            case "login": {
-                url = "login";
-                break;
-            }
-            case "preview-quiz": {
-                url = "PreviewQuizServlet";
-                request.getRequestDispatcher(url).forward(request, response);
-                return;
-            }
-            case "manage-quizzes": {
-                url = "ViewManageQuizServlet";
-                request.getRequestDispatcher(url).forward(request, response);
-                return;
-            }
-            case "add-quiz": {
-                url = "user-only/add-quiz";
-                break;
-            }
-            default: {
-                url = "user-only/home";
-                break;
-            }
+        HttpSession session = request.getSession(false);
+        UUID userId = (UUID) session.getAttribute("currentUserId");
+        try {
+            List<Quiz> currentUsersQuiz = QuizService.getQuizByUserId(userId.toString());
+            request.setAttribute("list", currentUsersQuiz);
+        } catch (UUIDParseException ex) {
+            response.sendRedirect("home");
+            return;
         }
-        request.getRequestDispatcher(base + url + extension).forward(request, response);
+        request.getRequestDispatcher("WEB-INF/jsp/user-only/manage-quiz.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

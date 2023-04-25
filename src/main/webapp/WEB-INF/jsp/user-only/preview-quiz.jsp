@@ -16,7 +16,17 @@
             <p>${currentQuiz.getDescription()}</p>
             <p>Created by ${creator}</p>
             <p>There are ${noquestions} question(s) in this quiz</p>
-            
+            <p>Quiz code: ${currentQuiz.getCode()}</p>
+
+            <form action="action" method="POST">
+                <input type="hidden" name="action" value="start-quiz"/>
+                <input type="hidden" name="id" value="${currentQuiz.getId()}"/>
+                <c:if test="${currentQuiz.getPassword() != null}">
+                    <label for="enter-quiz-password">Enter quiz password:</label>
+                    <input type="password" name="password" placeholder="Enter password" id="enter-quiz-password"/>
+                </c:if>
+                <input type="submit" value="Start quiz"/>
+            </form>
         </div>
     </body>
 </html>

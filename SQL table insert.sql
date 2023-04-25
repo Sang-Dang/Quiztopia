@@ -24,23 +24,17 @@ VALUES
         FROM users
         WHERE username = 'admin'), 'A1fr33');
 INSERT INTO [quizzes]
-    (title, description, user_id, code)
+    (title, description, user_id, code, password)
 VALUES
     ('History', 'A quiz about history', (SELECT id
         FROM users
-        WHERE username = 'admin'), 'Pore12');
+        WHERE username = 'admin'), 'Pore12', '12345');
 INSERT INTO [quizzes]
     (title, description, user_id, code)
 VALUES
     ('Geography', 'A quiz about geography', (SELECT id
         FROM users
         WHERE username = 'user'), '24J22A');
-INSERT INTO [quizzes]
-    (title, description, user_id, code)
-VALUES
-    ('Science', 'A quiz about science', (SELECT id
-        FROM users
-        WHERE username = 'user'), 'LfgeAD');
 INSERT INTO [quizzes]
     (title, description, user_id, code)
 VALUES
