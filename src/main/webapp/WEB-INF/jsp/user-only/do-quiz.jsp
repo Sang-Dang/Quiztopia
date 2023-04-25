@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Do Quiz | ${initparam.sitename}</title>
+        <title>Do Quiz | ${initParam.sitename}</title>
     </head>
     <body>
         

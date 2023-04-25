@@ -46,6 +46,10 @@ public class ActionController extends HttpServlet {
                 url = "PreviewQuizServlet";
                 break;
             }
+            case "add-quiz": {
+                url = "AddQuizServlet";
+                break;
+            }
             default: {
                 throw new BackendException();
             }
