@@ -21,7 +21,7 @@ CREATE TABLE [quizzes]
     [description] VARChAR(255) NOT NULL,
     [created_at] DATETIME NOT NULL DEFAULT GETDATE(),
     [user_id] UNIQUEIDENTIFIER NOT NULL FOREIGN KEY REFERENCES users(id) ON DELETE CASCADE,
-    [password] VARCHAR(255) NULL,
+    [password] VARCHAR(255) NOT NULL DEFAULT '',
     [code] VARCHAR(6) NOT NULL UNIQUE
 )
 

@@ -52,6 +52,16 @@ public class PageController extends HttpServlet {
                 request.getRequestDispatcher(url).forward(request, response);
                 return;
             }
+            case "do-quiz": {
+                url = "DoQuizServlet";
+                request.getRequestDispatcher(url).forward(request, response);
+                return;
+            }
+            case "view-results": {
+                url = "ViewResultsServlet";
+                request.getRequestDispatcher(url).forward(request, response);
+                return;
+            }
             default: {
                 url = "user-only/home";
                 break;

@@ -21,13 +21,13 @@
             <p>Quiz code: ${currentQuiz.getCode()}</p>
 
             <table>
-                <form action="action" method="POST">
-                    <input type="hidden" name="action" value="start-quiz"/>
-                    <input type="hidden" name="id" value="${currentQuiz.getId()}"/>
-                    <c:if test="${currentQuiz.getPassword() != null}">
+                <form action="home" method="POST">
+                    <input type="hidden" name="page" value="do-quiz"/>
+                    <input type="hidden" name="code" value="${currentQuiz.getCode()}"/>
+                    <c:if test="${!currentQuiz.getPassword().isEmpty()}">
                         <tr>
                             <td><label for="enter-quiz-password">Enter quiz password:</label></td>
-                            <td><input type="password" name="password" placeholder="Enter password" id="enter-quiz-password"/></td>
+                            <td><input type="password" name="password" placeholder="Enter password" value="" id="enter-quiz-password"/></td>
                         </tr>
                     </c:if>
                     <tr>

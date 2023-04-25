@@ -18,11 +18,11 @@ VALUES
 
 -- INSERT INTO QUIZZES
 INSERT INTO [quizzes]
-    (title, description, user_id, code)
+    (title, description, user_id, code, password)
 VALUES
     ('Math', 'A quiz about maths', (SELECT id
         FROM users
-        WHERE username = 'admin'), 'A1fr33');
+        WHERE username = 'admin'), 'A1fr33', '');
 INSERT INTO [quizzes]
     (title, description, user_id, code, password)
 VALUES
@@ -30,23 +30,23 @@ VALUES
         FROM users
         WHERE username = 'admin'), 'Pore12', '12345');
 INSERT INTO [quizzes]
-    (title, description, user_id, code)
+    (title, description, user_id, code, password)
 VALUES
     ('Geography', 'A quiz about geography', (SELECT id
         FROM users
-        WHERE username = 'user'), '24J22A');
+        WHERE username = 'user'), '24J22A', '');
 INSERT INTO [quizzes]
-    (title, description, user_id, code)
+    (title, description, user_id, code, password)
 VALUES
     ('English', 'A quiz about english', (SELECT id
         FROM users
-        WHERE username = 'user'), 'fdWEWS');
+        WHERE username = 'user'), 'fdWEWS', '');
 INSERT INTO [quizzes]
-    (title, description, user_id, code)
+    (title, description, user_id, code, password)
 VALUES
     ('Programming', 'A quiz about programming', (SELECT id
         FROM users
-        WHERE username = 'admin'), '321JFD');
+        WHERE username = 'admin'), '321JFD', '');
 
 -- INSERT INTO QUESTIONS
 INSERT INTO [questions]

@@ -143,7 +143,7 @@ public class QuizDAO extends AbstractDAO<Quiz> {
     public UUID loginToQuiz(String code, String password) {
         UUID returnValue = null;
         if (connection != null) {
-            try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("QUIZ_LOGIN"), getTableColumnNamesAsString(), getTableName()))) {
+            try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("QUIZ_LOGIN"), getTableName()))) {
                 statement.setString(1, code);
                 statement.setString(2, password);
 

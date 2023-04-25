@@ -53,7 +53,7 @@ public class ResultDAO extends AbstractDAO<Result> {
 
     public List<Result> getResultsByUserId(UUID userId){
         List<Result> returnValue = null;
-        try (PreparedStatement statement = getConnection().prepareStatement(String.format(SQL.query("SELECT_BY_USERID"), getTableName(), getTableColumnNamesAsString()))) {
+        try (PreparedStatement statement = getConnection().prepareStatement(String.format(SQL.query("SELECT_BY_USER_ID"), getTableColumnNamesAsString(), getTableName()))) {
             statement.setObject(1, userId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if(resultSet != null) {

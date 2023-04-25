@@ -1,19 +1,30 @@
-package com.fpt.assignment.controller;
+package com.fpt.assignment.controller.page;
 
-import com.fpt.assignment.exception.runtime.BackendException;
 import java.io.IOException;
+import java.util.List;
+import java.util.UUID;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fpt.assignment.dto.Answer;
+import com.fpt.assignment.dto.Question;
+import com.fpt.assignment.exception.checked.ObjectNotFoundException;
+import com.fpt.assignment.exception.checked.ValidationException;
+import com.fpt.assignment.service.AnswerService;
+import com.fpt.assignment.service.QuestionService;
+import com.fpt.assignment.service.QuizService;
+import com.fpt.assignment.util.Util;
+
 /**
  *
  * @author User
  */
-@WebServlet(name = "ActionController", urlPatterns = {"/ActionController", "/action"})
-public class ActionController extends HttpServlet {
+@WebServlet(name = "DoQuizServlet", urlPatterns = {"/DoQuizServlet"})
+public class DoQuizServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -26,44 +37,35 @@ public class ActionController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action"), url;
-        action = action == null ? "" : action;
+        String code = request.getParameter("code");
+        String password = request.getParameter("password");
+        password = password == null ? "" : password;
+        String error;
 
-        switch (action) {
-            case "login": {
-                url = "LoginServlet";
-                break;
+        String currentURL = request.getHeader("referer");
+        currentURL = Util.removeSuccessAndError(currentURL);
+
+        try {
+            UUID quizId = QuizService.loginToQuiz(code, password);
+            if(quizId == null) {
+                throw new ObjectNotFoundException();
             }
-            case "register": {
-                url = "RegisterServlet";
-                break;
-            }
-            case "logout": {
-                url = "LogoutServlet";
-                break;
-            }
-            case "preview-quiz": {
-                url = "PreviewQuizServlet";
-                break;
-            }
-            case "add-quiz": {
-                url = "AddQuizServlet";
-                break;
-            }
-            case "delete-quiz": {
-                url = "DeleteQuizServlet";
-                break;
-            }
-            case "submit-quiz": {
-                url = "SubmitServlet";
-                break;
-            }
-            default: {
-                throw new BackendException();
-            }
+            List<Question> questions = QuestionService.getQuestionsByQuizId(quizId.toString());
+            List<Answer> answers = AnswerService.getAnswersByQuestion(questions);
+            request.setAttribute("quizId", quizId);
+            request.setAttribute("questions", questions);
+            request.setAttribute("answers", answers);
+            request.getRequestDispatcher("WEB-INF/jsp/user-only/do-quiz.jsp").forward(request, response);
+            return;
+        } catch(ValidationException ex) {
+            ex.printStackTrace();
+            error = "Invalid code or password. Please try again.";
+        } catch(ObjectNotFoundException ex) {
+            ex.printStackTrace();
+            error = "Incorrect Quiz Code or Password. Please try again.";
         }
-
-        request.getRequestDispatcher(url).forward(request, response);
+        currentURL = Util.addURLParameters(currentURL, "error", error);
+        response.sendRedirect(currentURL);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,0 +1,19 @@
+* {
+  font-family: montserrat, sans-serif;
+}
+
+#main-container {
+  padding: 50px;
+}
+#main-container .card {
+  padding: 15px;
+  border: 1px solid black;
+  margin: 10px 0;
+  width: 50%;
+}
+#main-container .card .answers {
+  display: flex;
+  flex-direction: column;
+}
+
+/*# sourceMappingURL=do-quiz.css.map */

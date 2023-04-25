@@ -10,6 +10,8 @@ import java.util.UUID;
 
 import com.fpt.assignment.database.util.SQL;
 import com.fpt.assignment.dto.Answer;
+import com.fpt.assignment.dto.Question;
+import com.fpt.assignment.validator.QuestionValidator;
 
 public class AnswerDAO extends AbstractDAO<Answer> {
 
@@ -82,8 +84,8 @@ public class AnswerDAO extends AbstractDAO<Answer> {
         }
         return returnValue;
     }
-    
-    public List<Answer> getCorrectAnswerByQuestionId(UUID questionId) {
+        
+    public List<Answer> getCorrectAnswersByQuestionId(UUID questionId) {
         List<Answer> returnValue = null;
         try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("ANSWERS_GET_CORRECT_ANSWER"), getTableColumnNamesAsString(), getTableName()))) {
             statement.setObject(1, questionId);
@@ -97,6 +99,35 @@ public class AnswerDAO extends AbstractDAO<Answer> {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        return returnValue;
+    }
+
+    public List<Answer> getAnswersByQuestions(List<Question> questions) {
+        List<String> questionIds = new ArrayList<>();
+        for(Question i: questions) {
+            QuestionValidator questionValidator = new QuestionValidator();
+            try {
+                questionValidator.validateId(i.getId());
+                questionIds.add("'" + i.getId().toString() + "'");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        List<Answer> returnValue = null;
+        if(connection != null) {
+            try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("ANSWERS_GET_ANSWERS_BY_QUESTIONS"), getTableColumnNamesAsString(), getTableName(), String.join(",", questionIds)))) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet != null) {
+                        returnValue = new ArrayList<>();
+                        while (resultSet.next()) {
+                            returnValue.add(setSelectionQueryParameters(resultSet));
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return returnValue;
     }

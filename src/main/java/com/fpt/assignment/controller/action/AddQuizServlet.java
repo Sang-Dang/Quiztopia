@@ -40,9 +40,6 @@ public class AddQuizServlet extends HttpServlet {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
         String password = request.getParameter("password");
-        if(password.isEmpty()) {
-            password = null;
-        }
         HttpSession session = request.getSession(false);
         UUID userId = (UUID) session.getAttribute("currentUserId");
 

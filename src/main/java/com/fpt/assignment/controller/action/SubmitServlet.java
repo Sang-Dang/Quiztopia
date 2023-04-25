@@ -1,12 +1,21 @@
 package com.fpt.assignment.controller.action;
 
-import com.fpt.assignment.dto.User;
+import com.fpt.assignment.exception.checked.ValidationException;
+import com.fpt.assignment.service.QuizService;
+import com.fpt.assignment.service.ResultService;
+import com.fpt.assignment.util.Util;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -26,15 +35,33 @@ public class SubmitServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User currentUser = (User) request.getAttribute("currentUser");
+        String error, success;
+        String[] questionIds = request.getParameterValues("questionId");
+        List<String> questions = Arrays.asList(questionIds);
+        HashMap<String, ArrayList<String>> answerSet = new HashMap<>();
+        for(String i: questions) {
+            String[] chosenAnswers = request.getParameterValues(i);
+            ArrayList<String> answers = new ArrayList<>(Arrays.asList(chosenAnswers));
+            answerSet.put(i, answers);
+        }
         
-        // fetch all question ids in quiz
-        // for each question id (input name), get all corresponding answers from request parameter (input value)
-        // thus, we have two values: question id UUID and answer id UUID
-        // store all those values in list<String id, String[] answersChosen> , transfer to quizservice, check answers
-        // you now have the Result object. 
-        // go to result.jsp and display that. 
+        System.out.println(answerSet);
         
+        HttpSession session = request.getSession(false);
+        UUID userId = (UUID) session.getAttribute("currentUserId");
+        String quizId = request.getParameter("quizId");
+        
+        try {
+            int result = QuizService.calculateResults(answerSet);
+            ResultService.saveResult(result, quizId, userId.toString());
+            success = "Attempt finished. Check out your score!";
+            response.sendRedirect("home?page=view-results&success=" + Util.encode(success));
+            return;
+        } catch (ValidationException ex) {
+            error = "Something went wrong with your quiz. Please reattempt the quiz.";
+            ex.printStackTrace();
+        }
+        response.sendRedirect("home?error=" + Util.encode(error));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

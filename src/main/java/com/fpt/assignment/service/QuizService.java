@@ -58,12 +58,9 @@ public class QuizService {
      * @param userId Id of the user
      * @return List of quizzes of the user
      */
-    public static UUID loginToQuiz(String code, String password) throws ValidationException {
+    public static UUID loginToQuiz(String code, String password) {
         UUID returnValue = null;
-        QuizValidator validator = new QuizValidator();
         try (QuizDAO quizDAO = new QuizDAO(Quiz.class)) {
-            validator.validateCode(code);
-            validator.validatePassword(password);
             returnValue = quizDAO.loginToQuiz(code, password);
         }
         return returnValue;
@@ -91,7 +88,7 @@ public class QuizService {
                 UUID UUIDQuestionId = Converter.toUUID(questionId);
 
                 // databaseAnswers: list of correct answers in the database
-                List<Answer> databaseAnswers = answerDAO.getAnswersByQuestionId(UUIDQuestionId);
+                List<Answer> databaseAnswers = answerDAO.getCorrectAnswersByQuestionId(UUIDQuestionId);
                 List<String> correctAnswers = new ArrayList<>(); // convert to list of answer ids
                 for (Answer i : databaseAnswers) {
                     correctAnswers.add(i.getId().toString());
@@ -129,7 +126,7 @@ public class QuizService {
             current.setUser_id(user_id);
             current.setTitle(title);
             current.setDescription(description);
-            current.setPassword(password);
+            current.setPassword(password == null ? "" : password);
             current.setCode(CodeGenerator.generateCode());
             current.setCreated_at(LocalDate.now());
             
@@ -189,6 +186,6 @@ public class QuizService {
     }
     
     public static void main(String[] args) throws Exception {
-        System.out.println(createQuiz("765DCFE9-FC14-4B06-9B50-E3CD3CBFFE72", "Pop Quiz", "This is a pop quiz", null));
+        System.out.println(loginToQuiz("fdWEWS", ""));
     }
 }

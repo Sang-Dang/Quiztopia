@@ -24,6 +24,7 @@
         <ul id="nav-items">
             <li class="nav-item"><a href="home">Home</a></li>
             <li class="nav-item"><a href="home?page=manage-quizzes">Manage Quizzes</a></li>
+            <li class="nav-item"><a href="home?page=view-results">View Results</a></li>
         </ul>
     </header>
     <div id="nav-functions">

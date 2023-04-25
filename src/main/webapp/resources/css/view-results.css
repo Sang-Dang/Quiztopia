@@ -1,0 +1,53 @@
+* {
+  font-family: montserrat, sans-serif;
+}
+
+* {
+  font-family: montserrat, sans-serif;
+}
+
+.tooltip {
+  position: relative;
+  border-bottom: 1px dotted black;
+  cursor: select;
+  display: inline;
+}
+.tooltip .tooltiptext {
+  font-size: 0.8rem;
+  visibility: hidden;
+  width: max-content;
+  max-width: 200px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.tooltip .tooltiptext img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 15%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/*# sourceMappingURL=view-results.css.map */

@@ -5,10 +5,12 @@ import java.util.UUID;
 
 import com.fpt.assignment.database.dao.AnswerDAO;
 import com.fpt.assignment.dto.Answer;
+import com.fpt.assignment.dto.Question;
 import com.fpt.assignment.exception.checked.ValidationException;
 import com.fpt.assignment.exception.checked.validate.UUIDParseException;
 import com.fpt.assignment.util.Converter;
 import com.fpt.assignment.validator.AnswerValidator;
+import java.util.ArrayList;
 
 public class AnswerService {
     private AnswerService() {}
@@ -38,7 +40,7 @@ public class AnswerService {
         List<Answer> returnValue = null;
         try (AnswerDAO answerDAO = new AnswerDAO(Answer.class)) {
             UUID id = Converter.toUUID(questionId);
-            returnValue = answerDAO.getCorrectAnswerByQuestionId(id);
+            returnValue = answerDAO.getCorrectAnswersByQuestionId(id);
         }
         return returnValue;
     }
@@ -81,6 +83,24 @@ public class AnswerService {
 
             returnValue = answerDAO.addWithReturn(newAnswer);
             answerDAO.finalize(returnValue != null);
+        }
+        return returnValue;
+    }
+
+    public static List<Answer> getAnswersByQuestion(List<Question> questions) {
+        List<Answer> returnValue = null;
+        try (AnswerDAO answerDAO = new AnswerDAO(Answer.class)) {
+            returnValue = answerDAO.getAnswersByQuestions(questions);
+        }
+        return returnValue;
+    }
+    
+    public static List<Answer> getAnswers(String quizId, List<Answer> answers) {
+        List<Answer> returnValue = new ArrayList<>();
+        for(Answer i: answers) {
+            if(i.getQuestion_id().toString().equals(quizId)) {
+                returnValue.add(i);
+            }
         }
         return returnValue;
     }
