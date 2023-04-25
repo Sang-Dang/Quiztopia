@@ -58,7 +58,7 @@ public class QuizDAO extends AbstractDAO<Quiz> {
         UUID returnValue = null;
         try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("ADD_RETURN_ID"), getTableName(), getTableColumnNamesAsStringWithoutId(), getTableColumnNamesAsQuestionMarksWithoutId()))) {
             setDMLQueryParameters(statement, entity, false);
-            if(statement.executeUpdate() == 1) {
+            if (statement.executeUpdate() == 1) {
                 try (ResultSet resultSet = statement.getGeneratedKeys()) {
                     if (resultSet.next()) {
                         returnValue = resultSet.getObject(1, UUID.class);
@@ -123,15 +123,34 @@ public class QuizDAO extends AbstractDAO<Quiz> {
         return returnValue;
     }
 
+    public Quiz getQuizByTitle(String title) {
+        Quiz returnValue = null;
+        if (connection != null) {
+            try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("QUIZ_SELECT_BY_TITLE"), getTableColumnNamesAsString(), getTableName()))) {
+                statement.setString(1, title);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        returnValue = setSelectionQueryParameters(resultSet);
+                    }
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return returnValue;
+    }
+
     public UUID loginToQuiz(String code, String password) {
         UUID returnValue = null;
         if (connection != null) {
             try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("QUIZ_LOGIN"), getTableColumnNamesAsString(), getTableName()))) {
                 statement.setString(1, code);
                 statement.setString(2, password);
+
                 try (ResultSet resultSet = statement.executeQuery()) {
                     if (resultSet.next()) {
-                        returnValue = resultSet.getObject("id", UUID.class);
+                        returnValue = resultSet.getObject("id", UUID.class
+                        );
                     }
                 }
             } catch (SQLException e) {
