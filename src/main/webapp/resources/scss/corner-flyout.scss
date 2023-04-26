@@ -15,11 +15,13 @@ $border-radius: 10px;
         border-radius: $border-radius;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         visibility: hidden;
+        /*display: none;*/
         transition: all 500ms cubic-bezier(.42,.97,.52,1.49);
         
         &.active {
             right: 20px;
             visibility: visible;
+            /*display: block;*/
         }
 
         .flyout-icon {

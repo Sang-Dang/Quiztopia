@@ -16,11 +16,13 @@
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   visibility: hidden;
+  /*display: none;*/
   transition: all 500ms cubic-bezier(0.42, 0.97, 0.52, 1.49);
 }
 #corner-flyouts-container .flyout.active {
   right: 20px;
   visibility: visible;
+  /*display: block;*/
 }
 #corner-flyouts-container .flyout .flyout-icon {
   width: 75px;

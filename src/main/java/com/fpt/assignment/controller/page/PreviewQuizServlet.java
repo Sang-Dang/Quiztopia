@@ -1,12 +1,15 @@
 package com.fpt.assignment.controller.page;
 
 import com.fpt.assignment.dto.Quiz;
+import com.fpt.assignment.dto.Result;
 import com.fpt.assignment.exception.checked.ObjectNotFoundException;
 import com.fpt.assignment.exception.checked.ValidationException;
 import com.fpt.assignment.service.QuizService;
+import com.fpt.assignment.service.ResultService;
 import com.fpt.assignment.service.UserService;
 import com.fpt.assignment.util.Util;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,6 +47,9 @@ public class PreviewQuizServlet extends HttpServlet {
             }
             int questions = QuizService.getNumberOfQuestions(currentQuiz.getId().toString());
             String user = UserService.getSafeUserById(currentQuiz.getUser_id()).getUsername();
+            List<Result> results = ResultService.getResultsByQuizId(currentQuiz.getId().toString());
+            
+            request.setAttribute("results", results);
             request.setAttribute("creator", user);
             request.setAttribute("noquestions", questions);
             request.setAttribute("currentQuiz", currentQuiz);

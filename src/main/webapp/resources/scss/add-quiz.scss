@@ -1,0 +1,48 @@
+@import "settings.scss";
+
+#main-container {
+    padding: $page-padding;
+}
+
+.create-question, .delete-question {
+    display: inline-block;
+    padding: 10px;
+    margin: 20px 0;
+    border: 1px solid black;
+    background-color: #cccccc;
+    transition: all 0.1s linear;
+
+    &:hover {
+        opacity: .7;
+        cursor: pointer;
+    }
+    
+    &:active {
+        transform: scale(90%);
+    }
+}
+
+.create-answer, .delete-answer {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: red;
+    color: white;
+    border: 1px solid black;
+    transition: all 0.2s linear;
+    &:hover {
+        opacity: .7;
+        cursor: pointer;
+    }
+    
+    &:active {
+        transform: scale(90%);
+    }
+}
+
+
+.question-container {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+}

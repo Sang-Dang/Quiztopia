@@ -38,10 +38,12 @@ public class QuizValidator extends AbstractValidator<Quiz> {
     }
     
     public void validateTitle(String title) throws ValidationException {
+        nonEmptyString(title);
         lengthString(title, 50);
     }
 
     public void validateDescription(String description) throws ValidationException {
+        nonEmptyString(description);
         nullObject(description);
     }
 
@@ -60,6 +62,7 @@ public class QuizValidator extends AbstractValidator<Quiz> {
     }
 
     public void validateCode(String code) throws ValidationException {
+        nonEmptyString(code);
         lengthString(code, 6);
     }
 }

@@ -33,6 +33,7 @@ public class QuestionValidator extends AbstractValidator<Question> {
     }
 
     public void validateQuestion(String question) throws ValidationException {
+        nonEmptyString(question);
         lengthString(question, 255);
     }
 }

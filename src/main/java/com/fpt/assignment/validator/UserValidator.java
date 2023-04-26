@@ -30,14 +30,17 @@ public class UserValidator extends AbstractValidator<User> {
     }
 
     public void validateUsername(String username) throws ValidationException {
+        nonEmptyString(username);
         lengthString(username, 50);
     }
 
     public void validatePassword(String password) throws ValidationException {
+        nonEmptyString(password);
         lengthString(password, 255);
     }
 
     public void validateEmail(String email) throws ValidationException {
+        nonEmptyString(email);
         lengthString(email, 50);
     }
 

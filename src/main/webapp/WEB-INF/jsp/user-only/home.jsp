@@ -23,18 +23,18 @@
                     <tr>
                         <td colspan="100%"><h1>Public Quizzes</h1></td>
                     </tr>
-                    <tr>
-                        <td colspan="100%">
-                            <form action="action" method="GET">
-                                <input type="hidden" name="action" value="search-public"/>
-                                <input type="text" name="searchterm" placeholder="Enter your searchterm"/>
-                                <select name="searchtype">
-                                    <option value="search-by-title">Search by Title</option>
-                                </select>
-                                <input type="submit" value="Search"/>
-                            </form>
-                        </td>
-                    </tr>
+                    <!--                    <tr>
+                                            <td colspan="100%">
+                                                <form action="action" method="GET">
+                                                    <input type="hidden" name="action" value="search-public"/>
+                                                    <input type="text" name="searchterm" placeholder="Enter your searchterm"/>
+                                                    <select name="searchtype">
+                                                        <option value="search-by-title">Search by Title</option>
+                                                    </select>
+                                                    <input type="submit" value="Search"/>
+                                                </form>
+                                            </td>
+                                        </tr>-->
                     <tr style="height: 20px;"><td colspan="100%"></td></tr>
                     <tr>
                         <th>No.</th>
@@ -70,5 +70,7 @@
                 </form>
             </section>
         </div>
+        <comp:successpopup message="${param.success}"/>
+        <comp:errorpopup message="${param.error}"/>
     </body>
 </html>

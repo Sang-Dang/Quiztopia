@@ -39,5 +39,7 @@
                 <input type="submit" value="Submit Quiz"/>
             </form>
         </section>
+        <comp:successpopup message="${param.success}"/>
+        <comp:errorpopup message="${param.error}"/>
     </body>
 </html>

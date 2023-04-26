@@ -8,6 +8,7 @@ public enum SQL {
     ADD_RETURN_ID ("DECLARE @id UNIQUEIDENTIFIER; SET @id = NEWID(); INSERT INTO %s (id, %s) VALUES (@id, %s); SELECT @id;"),
     UPDATE ("UPDATE %s SET %s WHERE id = ?;"),
     SELECT_BY_USER_ID ("SELECT %s FROM %s WHERE user_id = ?;"),
+    SELECT_BY_QUIZ_ID ("SELECT %s FROM %s WHERE quiz_id = ?;"),
     USER_SELECT_BY_USERNAME ("SELECT id FROM %s WHERE username = ?;"),
     USER_SELECT_BY_EMAIL ("SELECT id FROM %s WHERE email = ?;"),
     USER_SELECT_BY_USERNAME_PASSWORD ("SELECT id FROM %s WHERE username = ? AND password = ?;"),

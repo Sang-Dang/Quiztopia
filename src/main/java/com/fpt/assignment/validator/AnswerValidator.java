@@ -35,6 +35,7 @@ public class AnswerValidator extends AbstractValidator<Answer> {
     }
     
     public void validateAnswer(String answer) throws ValidationException {
+        nonEmptyString(answer);
         lengthString(answer, 255);
     }
 

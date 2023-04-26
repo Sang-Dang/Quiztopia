@@ -32,6 +32,12 @@ public abstract class AbstractValidator<T> {
     public void validateId(UUID id) throws ValidationException {
         nullObject(id);
     }
+    
+    public void nonEmptyString(String string) throws NullObjectException {
+        if(string == null || string.isEmpty()) {
+            throw new NullObjectException("String cannot be empty or null");
+        }
+    }
 
     public void nullObject(Object object) throws NullObjectException {
         if(object == null) {

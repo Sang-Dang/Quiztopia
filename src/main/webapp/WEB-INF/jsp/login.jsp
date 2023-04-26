@@ -37,5 +37,7 @@
                 </form>
             </section>
         </div>
+        <comp:successpopup message="${param.success}"/>
+        <comp:errorpopup message="${param.error}"/>
     </body>
 </html>

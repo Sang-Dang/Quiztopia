@@ -56,12 +56,13 @@ public class UserService {
             validator.validateUsername(username);
             validator.validatePassword(password);
             validator.validateEmail(email);
-
-            if (userDAO.getByUsername(username) == null) {
-                throw new ValidationException("username");
+            UUID temp = userDAO.getByUsername(username);
+            
+            if (temp != null) {
+                throw new ValidationException("username exists already");
             }
 
-            if (userDAO.getByEmail(email) == null) {
+            if (userDAO.getByEmail(email) != null) {
                 throw new ValidationException("email");
             }
 

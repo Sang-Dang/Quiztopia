@@ -12,6 +12,16 @@
     <filter-mapping>
         <filter-name>UserAuthenticator</filter-name>
         <url-pattern>/WEB-INF/jsp/user-only/*</url-pattern>
+        <url-pattern>/DoQuizServlet</url-pattern>
+        <url-pattern>/PreviewQuizServlet</url-pattern>
+        <url-pattern>/SearchQuizServelet</url-pattern>
+        <url-pattern>/ViewManageQuizServlet</url-pattern>
+        <url-pattern>/ViewQuizServlet</url-pattern>
+        <url-pattern>/ViewResultsServlet</url-pattern>
+        <url-pattern>/AddQuizServlet</url-pattern>
+        <url-pattern>/DeleteQuizServlet</url-pattern>
+        <url-pattern>/LogoutServlet</url-pattern>
+        <url-pattern>/SubmitServlet</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
@@ -30,4 +40,8 @@
             30
         </session-timeout>
     </session-config>
+    <error-page>
+        <exception-type>/RuntimeException</exception-type>
+        <location>/error.jsp</location>
+    </error-page>
 </web-app>

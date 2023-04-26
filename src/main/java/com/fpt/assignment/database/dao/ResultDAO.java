@@ -68,4 +68,22 @@ public class ResultDAO extends AbstractDAO<Result> {
         }
         return returnValue;
     }
+    
+    public List<Result> getResultsByQuizId(UUID quizId){
+        List<Result> returnValue = null;
+        try (PreparedStatement statement = getConnection().prepareStatement(String.format(SQL.query("SELECT_BY_QUIZ_ID"), getTableColumnNamesAsString(), getTableName()))) {
+            statement.setObject(1, quizId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if(resultSet != null) {
+                    returnValue = new ArrayList<>();
+                    while (resultSet.next()) {
+                        returnValue.add(setSelectionQueryParameters(resultSet));
+                    }
+                }
+            } 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return returnValue;
+    }
 }

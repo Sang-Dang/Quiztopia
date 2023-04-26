@@ -2,6 +2,7 @@
 <%@taglib prefix="s" tagdir="/WEB-INF/tags/shortcuts/" %>
 <%@taglib prefix="comp" tagdir="/WEB-INF/tags/components/" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="com.fpt.assignment.service.UserService" %>
 
 <!DOCTYPE html>
 <html>
@@ -35,6 +36,26 @@
                     </tr>
                 </form>
             </table>
+            <br/>
+            <c:if test="${currentQuiz.getPassword() == null || currentQuiz.getPassword().isEmpty()}">
+                <h1>Leaderboard</h1>
+                <table>
+                    <tr>
+                        <th>User</th>
+                        <th>Score</th>
+                        <th>Completed on</th>
+                    </tr>
+                    <c:forEach var="result" items="${results}">
+                        <tr>
+                            <td>${UserService.getUserById(result.getUser_id()).getUsername()}</td>
+                            <td>${result.getScore()}/${noquestions}</td>
+                            <td>${result.getCompleted_at()}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </c:if>
         </div>
+        <comp:successpopup message="${param.success}"/>
+        <comp:errorpopup message="${param.error}"/>
     </body>
 </html>

@@ -69,6 +69,15 @@ public class ResultService {
         }
         return returnValue;
     }
+    
+    public static List<Result> getResultsByQuizId(String quizId) throws UUIDParseException {
+        List<Result> returnValue = null;
+        try (ResultDAO resultDAO = new ResultDAO(Result.class)) {
+            UUID quiz_id = Converter.toUUID(quizId);
+            returnValue = resultDAO.getResultsByQuizId(quiz_id);
+        }
+        return returnValue;
+    }
 
     public static float calculateScore(UUID quizId, int correct) {
         float returnValue = 0;

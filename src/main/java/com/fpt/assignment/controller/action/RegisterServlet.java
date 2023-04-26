@@ -5,8 +5,6 @@ import com.fpt.assignment.exception.runtime.BackendException;
 import com.fpt.assignment.service.UserService;
 import com.fpt.assignment.util.Util;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

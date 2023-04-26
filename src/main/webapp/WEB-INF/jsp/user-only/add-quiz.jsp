@@ -8,14 +8,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add quiz | ${initparam.sitename}</title>
         <s:CSSReset/>
+        <s:GeneralCSS filename="add-quiz"/>
         <s:jQuery/>
-        <style>
-            .question-container {
-                border: 1px solid black;
-                margin: 10px;
-                padding: 10px;
-            }
-        </style>
     </head>
     <body>
         <comp:navbar/>
@@ -35,6 +29,8 @@
                 <br><input type="submit" value="CREATE QUIZ">
             </form>
         </section>
+        <comp:successpopup message="${param.success}"/>
+        <comp:errorpopup message="${param.error}"/>
         <script src="resources/js/add-quiz.js"></script>
     </body>
 </html>
