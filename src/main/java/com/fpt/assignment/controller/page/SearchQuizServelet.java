@@ -5,20 +5,14 @@
  */
 package com.fpt.assignment.controller.page;
 
-import com.fpt.assignment.database.dao.QuizDAO;
 import com.fpt.assignment.dto.Quiz;
-import com.fpt.assignment.exception.checked.validate.UUIDParseException;
-import com.fpt.assignment.service.QuizService;
 import java.io.IOException;
-import java.io.PrintWriter;
 import com.fpt.assignment.service.QuizService;
 import java.util.List;
-import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,19 +31,11 @@ public class SearchQuizServelet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession(false);
-        UUID id = (UUID) session.getAttribute("id");
-        try {
-            String searchValue = request.getParameter("searchterm");
-            List<Quiz> quizResult = (List<Quiz>) QuizService.getQuizById(id.toString());
-            request.setAttribute("list", quizResult);
-        } catch (UUIDParseException ex) {
-            response.sendRedirect("home");
-            return;
-        } finally{
-            request.getRequestDispatcher("WEB-INF/jsp/user-only/home.jsp").forward(request, response);
-        }
+        String searchterm = request.getParameter("searchterm");
+        
+        List<Quiz> results = QuizService.searchByTitle(searchterm);
+        request.setAttribute("results", results);
+        request.getRequestDispatcher("home").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

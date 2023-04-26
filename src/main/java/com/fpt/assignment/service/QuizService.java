@@ -185,7 +185,15 @@ public class QuizService {
         return returnValue;
     }
     
+    public static List<Quiz> searchByTitle(String searchterm) {
+        List<Quiz> returnValue;
+        try (QuizDAO quizDAO = new QuizDAO(Quiz.class)) {
+            returnValue = quizDAO.searchQuizByTitle(searchterm);
+        }
+        return returnValue;
+    }
+    
     public static void main(String[] args) throws Exception {
-        System.out.println(loginToQuiz("fdWEWS", ""));
+        System.out.println(searchByTitle("a"));
     }
 }

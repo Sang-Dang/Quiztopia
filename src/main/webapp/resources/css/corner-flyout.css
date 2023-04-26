@@ -8,7 +8,7 @@
 #corner-flyouts-container .flyout {
   display: flex;
   align-items: center;
-  position: absolute;
+  position: fixed;
   right: -500px;
   bottom: 20px;
   height: 85px;

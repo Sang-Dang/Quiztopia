@@ -11,6 +11,8 @@ import java.util.UUID;
 
 import com.fpt.assignment.database.util.SQL;
 import com.fpt.assignment.dto.Quiz;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class QuizDAO extends AbstractDAO<Quiz> {
 
@@ -157,6 +159,27 @@ public class QuizDAO extends AbstractDAO<Quiz> {
                 e.printStackTrace();
             }
         }
+        return returnValue;
+    }
+    
+    public List<Quiz> searchQuizByTitle(String searchterm) {
+        List<Quiz> returnValue = null;
+        if(connection != null) {
+            try (PreparedStatement statement = connection.prepareStatement(String.format(SQL.query("QUIZ_SEARCH_BY_TITLE"), getTableColumnNamesAsString(), getTableName()))) {
+                statement.setString(1, "%" + searchterm + "%");
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if(resultSet != null) {
+                        returnValue = new ArrayList<>();
+                        while(resultSet.next()) {
+                            returnValue.add(setSelectionQueryParameters(resultSet));
+                        }
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(QuizDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         return returnValue;
     }
 }

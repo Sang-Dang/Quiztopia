@@ -4,6 +4,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.fpt.assignment.service.QuizService" %>
 <%@page import="com.fpt.assignment.service.UserService" %>
+<%@page import="com.fpt.assignment.util.Util" %>
+
 
 
 <!DOCTYPE html>
@@ -14,6 +16,11 @@
         <s:CSSReset/>
         <s:GeneralCSS filename="home"/>
         <s:GeneralCSS filename="home1"/>
+        <style>
+            .highlighted {
+                background-color: #6666ff;
+            }
+        </style>
     </head>
     <body>
         <comp:navbar/>
@@ -23,42 +30,70 @@
                     <tr>
                         <td colspan="100%"><h1>Public Quizzes</h1></td>
                     </tr>
-                    <!--                    <tr>
-                                            <td colspan="100%">
-                                                <form action="action" method="GET">
-                                                    <input type="hidden" name="action" value="search-public"/>
-                                                    <input type="text" name="searchterm" placeholder="Enter your searchterm"/>
-                                                    <select name="searchtype">
-                                                        <option value="search-by-title">Search by Title</option>
-                                                    </select>
-                                                    <input type="submit" value="Search"/>
-                                                </form>
-                                            </td>
-                                        </tr>-->
-                    <tr style="height: 20px;"><td colspan="100%"></td></tr>
                     <tr>
-                        <th>No.</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th></th>
+                        <td colspan="100%">
+                            <form action="action" method="GET">
+                                <input type="hidden" name="action" value="search"/>
+                                <input type="text" name="searchterm" placeholder="Enter your searchterm" value="${param.searchterm}"/>
+                                <select name="searchtype">
+                                    <option value="search-by-title">Search by Title</option>
+                                </select>
+                                <input type="submit" value="Search"/>
+                            </form>
+                        </td>
                     </tr>
-                    <c:set var="quizzes" value="${QuizService.getPublicQuizzes()}"/>
-                    <c:set var="counter" value="1"/>
-                    <c:forEach var="quiz" items="${quizzes}">
-                        <tr>
-                            <td>${counter}</td>
-                            <td>${quiz.getTitle()}</td>
-                            <td>${quiz.getDescription()}</td>
-                            <td>
-                                <form action="home">
-                                    <input type="hidden" name="page" value="preview-quiz"/>
-                                    <input type="hidden" name="id" value="${quiz.getCode()}"/>
-                                    <input type="submit" value="Preview"/>
-                                </form>
-                            </td>
-                        </tr>
-                        <c:set value="${counter + 1}" var="counter"/>
-                    </c:forEach>
+                    <tr style="height: 20px;"><td colspan="100%"></td></tr>
+                        <c:choose>
+                            <c:when test="${results != null && !results.isEmpty()}">
+                            <tr>
+                                <th>No.</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th></th>
+                            </tr>
+                            <c:set var="counter" value="1"/>
+                            <c:forEach var="quiz" items="${results}">
+                                <tr>
+                                    <td>${counter}</td>
+                                    <td>${Util.highlightSearchTermtoHTML(quiz.getTitle(), param.searchterm)}</td>
+                                    <td>${quiz.getDescription()}</td>
+                                    <td>
+                                        <form action="home">
+                                            <input type="hidden" name="page" value="preview-quiz"/>
+                                            <input type="hidden" name="id" value="${quiz.getCode()}"/>
+                                            <input type="submit" value="Preview"/>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <c:set var="counter" value="${counter + 1}"/>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <tr>
+                                <th>No.</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th></th>
+                            </tr>
+                            <c:set var="quizzes" value="${QuizService.getPublicQuizzes()}"/>
+                            <c:set var="counter" value="1"/>
+                            <c:forEach var="quiz" items="${quizzes}">
+                                <tr>
+                                    <td>${counter}</td>
+                                    <td>${quiz.getTitle()}</td>
+                                    <td>${quiz.getDescription()}</td>
+                                    <td>
+                                        <form action="home">
+                                            <input type="hidden" name="page" value="preview-quiz"/>
+                                            <input type="hidden" name="id" value="${quiz.getCode()}"/>
+                                            <input type="submit" value="Preview"/>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <c:set value="${counter + 1}" var="counter"/>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
                 </table>
             </section>
             <section id="private-quizzes">

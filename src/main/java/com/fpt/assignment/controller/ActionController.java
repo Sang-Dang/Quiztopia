@@ -58,6 +58,10 @@ public class ActionController extends HttpServlet {
                 url = "SubmitServlet";
                 break;
             }
+            case "search": {
+                url = "SearchQuizServelet";
+                break;
+            }
             default: {
                 throw new BackendException();
             }

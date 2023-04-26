@@ -68,4 +68,9 @@ public class Util {
         }
         return returnValue;
     }
+    
+    public static String highlightSearchTermtoHTML(String result, String searchTerm) {
+        result = result.replaceAll(("(?i)") + searchTerm, "<span class=\"highlighted\">" + searchTerm + "</span>");
+        return result;
+    }
 }

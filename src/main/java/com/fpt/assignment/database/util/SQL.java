@@ -16,6 +16,7 @@ public enum SQL {
     QUIZ_SELECT_BY_CODE ("SELECT %s FROM %s WHERE code = ?;"),
     QUIZ_SELECT_BY_TITLE ("SELECT %s FROM %s WHERE title = ?;"),
     QUIZ_LOGIN ("SELECT id FROM %s WHERE code = ? AND password = ?;"),
+    QUIZ_SEARCH_BY_TITLE ("SELECT %s FROM %S WHERE title LIKE ? AND password = ''"),
     QUESTIONS_GET_QUESTIONS_BY_QUIZID ("SELECT %s FROM %s WHERE quiz_id = ?;"),
     QUESTIONS_GET_NUMBER_OF_QUESTIONS_BY_QUIZID ("SELECT COUNT(*) FROM %s WHERE quiz_id = ?;"),
     ANSWERS_GET_ANSWERS_BY_QUESTIONID ("SELECT %s FROM %s WHERE question_id = ?;"),
