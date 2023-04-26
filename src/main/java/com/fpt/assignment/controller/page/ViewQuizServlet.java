@@ -3,18 +3,18 @@ package com.fpt.assignment.controller.page;
 import com.fpt.assignment.dto.Answer;
 import com.fpt.assignment.dto.Question;
 import com.fpt.assignment.dto.Quiz;
+import com.fpt.assignment.dto.Result;
 import com.fpt.assignment.exception.checked.ObjectNotFoundException;
 import com.fpt.assignment.exception.checked.ValidationException;
 import com.fpt.assignment.service.AnswerService;
 import com.fpt.assignment.service.QuestionService;
 import com.fpt.assignment.service.QuizService;
+import com.fpt.assignment.service.ResultService;
 import com.fpt.assignment.util.Util;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,6 +55,8 @@ public class ViewQuizServlet extends HttpServlet {
             for(Question i: questions) {
                 answers.addAll(AnswerService.getAnswersByQuestionId(i.getId().toString()));
             }
+            List<Result> results = ResultService.getResultsByQuizId(currentQuiz.getId().toString());
+            request.setAttribute("results", results);
             request.setAttribute("quiz", currentQuiz);
             request.setAttribute("questions", questions);
             request.setAttribute("answers", answers);
