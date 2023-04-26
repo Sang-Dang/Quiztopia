@@ -30,8 +30,10 @@
 > 
 
 ## 2. System GUI Design
+**Site Map**
 
-![Wireframe](https://user-images.githubusercontent.com/59560341/233794376-46aef863-525d-49a0-9706-11caee0a141a.png)
+![SM](https://user-images.githubusercontent.com/59560341/234459448-046b4f08-b9e1-49ff-97fa-3aadce844c40.png)
+
 
 **- Student screen:**
 ![quizlist student](https://user-images.githubusercontent.com/59560341/233799348-9a145e37-c3b7-4277-bd59-2ca9df390b92.jpg)
