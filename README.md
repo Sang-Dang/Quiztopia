@@ -66,7 +66,7 @@
 
 ## 3. Database design
 ER Diagram:
-![image](https://user-images.githubusercontent.com/92671777/233877568-ef289d8a-1f29-4e5d-8ccc-eecaf1d60f2d.png)
+![image](https://user-images.githubusercontent.com/92671777/234462350-b0120ae0-03ae-4c52-bae9-0322f7932850.png)
 
 ## 4. System Design
 The system was designed according to MVC2 standards, and we designed it in the order Model -> Controller -> View. This, of course, was all started by the creation of the database (which we created in Azure), and the formation of some basic DTO classes. Then we developed the necessary DAO classes for each DTO, each with separate implementations of basic CRUD methods (in addition to a list all method). Besides those methods, we also created helper methods for specific use-cases such as fetchQuizByUserId, or fetchPublicQuizzes. 
