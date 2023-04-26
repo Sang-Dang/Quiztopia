@@ -62,7 +62,45 @@
 ![image](https://user-images.githubusercontent.com/59560341/233799801-62316a2b-20d0-48c3-a586-b50205518620.png)
 **+ View Quiz**
 
-## Database design
+## 3. Database design
 ER Diagram:
 ![image](https://user-images.githubusercontent.com/92671777/233877568-ef289d8a-1f29-4e5d-8ccc-eecaf1d60f2d.png)
 
+## 4. System Design
+The system was designed according to MVC2 standards, and we designed it in the order Model -> Controller -> View. This, of course, was all started by the creation of the database (which we created in Azure), and the formation of some basic DTO classes. Then we developed the necessary DAO classes for each DTO, each with separate implementations of basic CRUD methods (in addition to a list all method). Besides those methods, we also created helper methods for specific use-cases such as fetchQuizByUserId, or fetchPublicQuizzes. 
+
+This is where we started to slightly deviate from traditional MVC2. Instead of putting all business logic in the Servlets, we decided to split the business logic up and put them in another package - the Service package. Functions in this package would contain full methods such as "login", "register", "createQuiz" with parameter validation and support for committing and rolling back Connections. This separation helped us debug code more easily, and it helped simplify the code in the servlets (which were harder to debug). 
+
+While business login was dealt with using methods in the service package, we limited the servlets to the following responsibilities as much as we could: Fetch request parameters, Execute service package methods, handle errors and exceptions, and determine response/requestDispatcher. In accordance with MVC2, our project has two central servlets: ActionController and ViewController. As the name suggests, ActionController is used for executing specific actions, such as "login", "register", "addQuiz", "startQuiz"... and can be accessed via the path /action. ViewController (/home), on the other hand, is used to call Servlets that prepare data for JSPs, such as fetching a list and storing it in request attributes for the JSP to display. This way, we could limit the amount of Java code in JSPs to only JSTL and EL.
+
+In the View part of MVC2, we used JSPs (stored in the WEB-INF folder) in combination with Custom Tag libraries, JSTL, EL, jQuery, and SCSS. We also used methods provided by the HTTPComponents Maven Dependency to assist in rewriting URLs. Additional tools include Online AI Chatbots which we used to generate SQL Insert statements, get feedback for design choices, and generate the more repetitive parts of our code, such as the implementation of CRUD methods in the DAO class (which are mostly similar for almost all DTOs).
+
+## 5. Conclusion and discussion
+Pros:
+- Fairly intuitive
+- Low coupling and high cohesion in classes
+- Secure against common URL rewriting
+- Uses Azure SQL Databases for easy scaling
+Cons:
+- Quite slow because of the number of connections to the database that need to be made per user
+- Lacking some essential features: User details, Quiz timer...
+- No responsive design nor accessibility features
+- Inefficient code in some places, could be replaced with a framework.
+
+What we've learnt throughout this project:
+- It is time-consuming and extremely difficult to develop efficient, fast, and reliable web applications with many features, especially in a short time frame. We should pay more respect to most websites online, even if they are buggy and laggy at times. 
+- It is immensely better to use pre-built frameworks instead of manually creating functionality.
+- Do not code when sleep deprived. 
+- Logging code should be added to most classes, alongside a local log file that logs all activity on the application.
+- Using Github for version control is extremely beneficial, especially among teams.
+- Thorough planning before development can help avoid many small bugs. 
+
+Improvements that could be made:
+- Utilization of Hibernate Validator and Hibernate ORM instead of creating DAO classes and Validation Classes.
+- Usage of more SQL queries that involve the "JOIN" operator to account for foreign keys (in our project, we just made two connections to fetch data from both tables in the foreign key)
+- Better code structure with documentation and error processing.
+- Better HTML and CSS structure with further utilization of custom tags
+- Implementation of a Connection Pool to manage large volumes of connections. 
+- Security features such as Password encryption and hashing
+- Better storage of login details (via a seperate database table instead of storing them in the session)
+- More features such as update quiz, quiz timer...
