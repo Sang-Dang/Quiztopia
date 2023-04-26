@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+ 
+
 /**
  *
  * @author User
@@ -14,7 +16,7 @@ public class DBUtils {
 
     private DBUtils() {
     }
-
+    
     private static boolean USE_LOCAL = true;
     private static final String IP = "localhost";
     private static final String instanceName = "SANG-DANG\\SQLEXPRESS";
